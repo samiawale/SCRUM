@@ -66,6 +66,11 @@ footer a {
 
 
 /* Additional styles for login page */
+#login-logo {
+  max-width: 150px;
+  height: auto;
+  margin-top: 20px;
+}
 .login-container {
   background-color: #fff; /* White background color for the login container */
   padding: 40px; /* Increased padding for more contrast */
@@ -85,6 +90,8 @@ footer a {
   border: 2px solid #4cae4c; /* Border color for the card */
   border-radius: 10px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adjusted box-shadow for more contrast */
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .card-header {
@@ -116,6 +123,18 @@ label {
 .btn-primary:hover {
   background-color: #398439; /* Darker green button on hover */
   border-color: #398439;
+}
+
+.btn-register {
+  background-color: #0099ff; /* Green button for registration */
+  border-color: #0099ff;
+  color: #fff;
+}
+
+.btn-register:hover {
+  background-color: #006cb5; /* Green button for registration on hover */
+  border-color: #006cb5;
+  color: #fff;
 }
 
   
