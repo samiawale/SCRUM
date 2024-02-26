@@ -1,0 +1,51 @@
+/* Custom CSS for Stadtgarten und Friedhöfer */
+body {
+    background-color: #5cb85c; /* Green background color */
+    color: #fff;
+  }
+  
+  .navbar {
+    background-color: #4cae4c; /* Darker green navbar */
+  }
+  
+  .jumbotron {
+    background-color: #4cae4c; /* Darker green jumbotron */
+    color: #fff;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 15px;
+  }
+  
+  .container {
+    margin-top: 2rem;
+    
+  }
+  
+  #treeImage {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  #logo {
+    max-width: 100px;
+    height: auto;
+    margin-right: 10px;
+  }
+  
+  #waterButton {
+    background-color: #4cae4c; /* Darker green button */
+    color: #fff;
+  }
+  
+  #map {
+    height: 600px;
+    margin: 50px;
+  }
+  
+  /* Custom CSS for Meine Baumkarte */
+  #map {
+    height: 600px;
+    margin: 50px;
+  }
+  
