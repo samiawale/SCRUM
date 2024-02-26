@@ -2,18 +2,22 @@
 body {
     background-color: #5cb85c; /* Green background color */
     color: #fff;
+    font-family: 'Lora', serif;
   }
   
   .navbar {
     background-color: #4cae4c; /* Darker green navbar */
   }
-  
+  /* Add this in your styles.css file or within the <style> tag in the head section */
+
+
   .jumbotron {
     background-color: #4cae4c; /* Darker green jumbotron */
     color: #fff;
     padding: 2rem;
     margin-bottom: 2rem;
     border-radius: 15px;
+    font-family: 'Lora', serif;
   }
   
   .container {
