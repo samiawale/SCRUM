@@ -70,17 +70,37 @@
  ];
 
 
-
  var markers = L.markerClusterGroup();
 
  trees.forEach(function(tree) {
      var marker = L.marker([tree.lat, tree.lng]).bindPopup(tree.name);
      markers.addLayer(marker);
+
+     var popupContent = '<p>' + tree.name + '</p><button class="water-btn">Gießen</button>';
+     marker.bindPopup(popupContent);
+
+     // Überprüfen, ob der Baum in der Nähe ist, bevor der Button hinzugefügt wird
+     var distance = map.distance(map.getCenter(), [tree.lat, tree.lng]);
+     if (distance <= 100) {
+         marker.on('popupopen', function() {
+             var popup = this.getPopup();
+             var button = popup.getContent().querySelector('.water-btn');
+             button.addEventListener('click', function() {
+                 // Hier können Sie die Logik zum Gießen des Baums einfügen
+                 marker.setIcon(L.icon({ iconUrl: 'red_tree_icon.png', iconSize: [32, 32] }));
+             });
+         });
+     } else {
+         marker.on('popupopen', function() {
+             var popup = this.getPopup();
+             var button = popup.getContent().querySelector('.water-btn');
+             button.style.display = 'none'; // Verstecke den Button, wenn der Baum nicht in der Nähe ist
+         });
+     }
  });
 
-
-
  map.addLayer(markers);
+
  // Get user's current location and show it on the map
  map.locate({setView: true, maxZoom: 15});
 

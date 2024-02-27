@@ -262,6 +262,25 @@ label {
   text-decoration: underline;
 }
 
-/* Add more styles as needed */
+.container {
+  margin: auto;
+}
 
+.table-container {
+  margin: auto;
+}
 
+table {
+  width: 50%;
+  border-collapse: collapse;
+  margin: auto;
+}
+
+table, th, td {
+  border: 1px solid #dee2e6;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+}
