@@ -46,6 +46,7 @@ footer a {
     max-width: 100px;
     height: auto;
     margin-right: 10px;
+    border-radius: 10cm;
   }
   
   #waterButton {
