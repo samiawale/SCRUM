@@ -2,25 +2,49 @@
 body {
     background-color: #5cb85c; /* Green background color */
     color: #fff;
+    font-family: 'Lora', serif;
   }
   
+  header {
+    color: #fff;
+    padding: 20px 0;
+  }
+  
+  h1{
+    font-family: 'Lora', serif;
+    font-size: 52px;
+  }
   .navbar {
     background-color: #4cae4c; /* Darker green navbar */
   }
-  
+  /* Add this in your styles.css file or within the <style> tag in the head section */
+
+
   .jumbotron {
     background-color: #4cae4c; /* Darker green jumbotron */
     color: #fff;
     padding: 2rem;
     margin-bottom: 2rem;
     border-radius: 15px;
+    font-family: 'Lora', serif;
   }
   
   .container {
     margin-top: 2rem;
     
   }
-  
+  footer {
+    background-color: #4cae4c; /* Darker green footer background */
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
   #treeImage {
     max-width: 100%;
     height: auto;
@@ -31,6 +55,7 @@ body {
     max-width: 100px;
     height: auto;
     margin-right: 10px;
+    border-radius: 10cm;
   }
   
   #waterButton {
@@ -38,19 +63,23 @@ body {
     color: #fff;
   }
   
-  #map {
-    height: 600px;
-    margin: 50px;
-  }
-  
   /* Custom CSS for Meine Baumkarte */
   #map {
     height: 600px;
     margin: 50px;
+    border: 1px;
+    outline: auto;
+    outline-color: #000;
+    outline-offset: 0.01cm;
   }
 
 
 /* Additional styles for login page */
+#login-logo {
+  max-width: 150px;
+  height: auto;
+  margin-top: 10px;
+}
 .login-container {
   background-color: #fff; /* White background color for the login container */
   padding: 40px; /* Increased padding for more contrast */
@@ -70,6 +99,8 @@ body {
   border: 2px solid #4cae4c; /* Border color for the card */
   border-radius: 10px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adjusted box-shadow for more contrast */
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .card-header {
@@ -93,9 +124,18 @@ label {
   color: #495057; /* Dark gray label text color */
 }
 
+/* Custom CSS for centering buttons */
+.btn-block {
+  display: block;
+  width: 50%;
+  margin: auto;
+}
+
 .btn-primary {
   background-color: #4cae4c; /* Darker green button */
   border-color: #4cae4c;
+  color: #fff;
+  margin-bottom: 5px;
 }
 
 .btn-primary:hover {
@@ -103,4 +143,144 @@ label {
   border-color: #398439;
 }
 
-  
+.btn-register {
+  background-color: #0099ff; /* Green button for registration */
+  border-color: #0099ff;
+  color: #fff;
+  margin-top: 5px;
+}
+
+.btn-register:hover {
+  background-color: #006cb5; /* Green button for registration on hover */
+  border-color: #006cb5;
+  color: #fff;
+}
+/* Assuming you have Bootstrap included for styling */
+
+.container-footer {
+  background-color: #4cae4c; /* Choose your preferred background color */
+  padding: 10px; /* Adjust the padding as needed */
+  color: #fff; /* Text color for links and icons */
+  size: max 100%;
+  position: relative;
+}
+
+.footer-link {
+  color: #fff; /* Link text color */
+  margin-right: 20px; /* Adjust spacing between links */
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+
+.footer-icon img {
+  width: 50px; /* Adjust the icon size as needed */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 10px; /* Adjust spacing between icons */
+  position: relative;
+}
+
+.btn-secondary {
+  background-color: #6c757d; /* Gray button for cancel */
+  border-color: #6c757d;
+  color: #fff;
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268; /* Gray button for cancel on hover */
+  border-color: #5a6268;
+  color: #fff;
+}
+
+#taskList {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  position: relative;
+  margin: auto;
+  width: 75%
+}
+
+#tasks {
+  list-style-type: none;
+  padding: 20px;
+  margin: 20px;
+  position: relative;
+  margin: auto;
+  width: 75%;
+}
+
+#tasks li {
+  background-color:#fff;
+  padding: 10px;
+  margin-bottom: 5px;
+  width: 75%;
+  position: relative;
+  margin: auto;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+#tasks li:hover {
+  background-color: #f2f2f2;
+}
+
+.pflanze-anleitung-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.pflanze-anleitung-header {
+  background-color: #4cae4c;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+.pflanze-anleitung-header h1 {
+  margin: 0;
+}
+
+.pflanze-anleitung-content {
+  padding: 20px;
+}
+
+.pflanze-anleitung-content h2 {
+  color: #4cae4c;
+}
+
+.pflanze-anleitung-content ol {
+  margin-bottom: 20px;
+}
+
+.pflanze-anleitung-content a {
+  color: #4cae4c;
+  text-decoration: underline;
+}
+
+.container {
+  margin: auto;
+}
+
+.table-container {
+  margin: auto;
+}
+
+table {
+  width: 50%;
+  border-collapse: collapse;
+  margin: auto;
+}
+
+table, th, td {
+  border: 1px solid #dee2e6;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+}
