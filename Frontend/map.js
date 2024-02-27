@@ -28,7 +28,7 @@
  var trees = [
      { lat: 52.135533, lng: 11.627624, name: 'Baum 1' },
      { lat: 52.158533, lng: 11.627624, name: 'Baum 2' },
-     { lat: 52.1490533, lng: 11.627624, name: 'Baum 3' },
+     { lat: 52.1490533, lng: 11.627624, name: 'Baum 3' , imageUrl: 'x_logo.png' },
      { lat: 52.136533, lng: 11.627624, name: 'Baum 8' },
      { lat: 52.137533, lng: 11.628624, name: 'Baum 9' },
      { lat: 52.138533, lng: 11.629624, name: 'Baum 10' },
@@ -70,33 +70,16 @@
  ];
 
 
+
  var markers = L.markerClusterGroup();
 
  trees.forEach(function(tree) {
      var marker = L.marker([tree.lat, tree.lng]).bindPopup(tree.name);
      markers.addLayer(marker);
 
-     var popupContent = '<p>' + tree.name + '</p><button class="water-btn">Gießen</button>';
+     var popupContent = '<p>' + tree.name + '</p><img src="' + tree.imageUrl + '" style="max-width: 100px; max-height: 100px;" /><button class="water-btn">Gießen</button>';
      marker.bindPopup(popupContent);
 
-     // Überprüfen, ob der Baum in der Nähe ist, bevor der Button hinzugefügt wird
-     var distance = map.distance(map.getCenter(), [tree.lat, tree.lng]);
-     if (distance <= 100) {
-         marker.on('popupopen', function() {
-             var popup = this.getPopup();
-             var button = popup.getContent().querySelector('.water-btn');
-             button.addEventListener('click', function() {
-                 // Hier können Sie die Logik zum Gießen des Baums einfügen
-                 marker.setIcon(L.icon({ iconUrl: 'red_tree_icon.png', iconSize: [32, 32] }));
-             });
-         });
-     } else {
-         marker.on('popupopen', function() {
-             var popup = this.getPopup();
-             var button = popup.getContent().querySelector('.water-btn');
-             button.style.display = 'none'; // Verstecke den Button, wenn der Baum nicht in der Nähe ist
-         });
-     }
  });
 
  map.addLayer(markers);
@@ -119,4 +102,6 @@
 
  map.on('locationfound', onLocationFound);
  map.on('locationerror', onLocationError);
+
+
  
