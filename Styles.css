@@ -136,5 +136,29 @@ label {
   border-color: #006cb5;
   color: #fff;
 }
+/* Assuming you have Bootstrap included for styling */
 
-  
+.container-footer {
+  background-color: #4cae4c; /* Choose your preferred background color */
+  padding: 10px; /* Adjust the padding as needed */
+  color: #fff; /* Text color for links and icons */
+  size: max 100%;
+  position: relative;
+}
+
+.footer-link {
+  color: #fff; /* Link text color */
+  margin-right: 20px; /* Adjust spacing between links */
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+
+.footer-icon img {
+  width: 50px; /* Adjust the icon size as needed */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 10px; /* Adjust spacing between icons */
+  position: relative;
+}
