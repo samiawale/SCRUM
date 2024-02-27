@@ -1,0 +1,106 @@
+/* Custom CSS for Stadtgarten und Friedhöfer */
+body {
+    background-color: #5cb85c; /* Green background color */
+    color: #fff;
+  }
+  
+  .navbar {
+    background-color: #4cae4c; /* Darker green navbar */
+  }
+  
+  .jumbotron {
+    background-color: #4cae4c; /* Darker green jumbotron */
+    color: #fff;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 15px;
+  }
+  
+  .container {
+    margin-top: 2rem;
+    
+  }
+  
+  #treeImage {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  #logo {
+    max-width: 100px;
+    height: auto;
+    margin-right: 10px;
+  }
+  
+  #waterButton {
+    background-color: #4cae4c; /* Darker green button */
+    color: #fff;
+  }
+  
+  #map {
+    height: 600px;
+    margin: 50px;
+  }
+  
+  /* Custom CSS for Meine Baumkarte */
+  #map {
+    height: 600px;
+    margin: 50px;
+  }
+
+
+/* Additional styles for login page */
+.login-container {
+  background-color: #fff; /* White background color for the login container */
+  padding: 40px; /* Increased padding for more contrast */
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Adjusted box-shadow for more contrast */
+}
+
+.login-form {
+  margin-top: 20px;
+}
+
+.login-form label {
+  color: #000; /* Black text color for labels */
+}
+
+.card {
+  border: 2px solid #4cae4c; /* Border color for the card */
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adjusted box-shadow for more contrast */
+}
+
+.card-header {
+  background-color: #4cae4c; /* Darker green header background */
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  color: #495057; /* Dark gray label text color */
+}
+
+.btn-primary {
+  background-color: #4cae4c; /* Darker green button */
+  border-color: #4cae4c;
+}
+
+.btn-primary:hover {
+  background-color: #398439; /* Darker green button on hover */
+  border-color: #398439;
+}
+
+  
