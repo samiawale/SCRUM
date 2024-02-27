@@ -115,9 +115,18 @@ label {
   color: #495057; /* Dark gray label text color */
 }
 
+/* Custom CSS for centering buttons */
+.btn-block {
+  display: block;
+  width: 50%;
+  margin: auto;
+}
+
 .btn-primary {
   background-color: #4cae4c; /* Darker green button */
   border-color: #4cae4c;
+  color: #fff;
+  margin-bottom: 5px;
 }
 
 .btn-primary:hover {
@@ -129,12 +138,13 @@ label {
   background-color: #0099ff; /* Green button for registration */
   border-color: #0099ff;
   color: #fff;
+  margin-top: 5px;
 }
 
 .btn-register:hover {
   background-color: #006cb5; /* Green button for registration on hover */
   border-color: #006cb5;
-  color: #fff;  
+  color: #fff;
 }
 /* Assuming you have Bootstrap included for styling */
 
@@ -161,5 +171,53 @@ label {
   height: auto; /* Maintain aspect ratio */
   margin-right: 10px; /* Adjust spacing between icons */
   position: relative;
-  border-radius: 100cm;
 }
+
+.btn-secondary {
+  background-color: #6c757d; /* Gray button for cancel */
+  border-color: #6c757d;
+  color: #fff;
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268; /* Gray button for cancel on hover */
+  border-color: #5a6268;
+  color: #fff;
+}
+
+#taskList {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  position: relative;
+  margin: auto;
+  width: 75%
+}
+
+#tasks {
+  list-style-type: none;
+  padding: 20px;
+  margin: 20px;
+  position: relative;
+  margin: auto;
+  width: 75%;
+}
+
+#tasks li {
+  background-color:#fff;
+  padding: 10px;
+  margin-bottom: 5px;
+  width: 75%;
+  position: relative;
+  margin: auto;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+#tasks li:hover {
+  background-color: #f2f2f2;
+}
+
+
