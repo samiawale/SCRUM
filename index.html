@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,9 +39,9 @@
                     <a class="nav-link" href="#">Water Trees</a>
                 </li>
                 <li
-                    class="nav-item">
-                <a class="nav-link" href="login.html">Login</a>
-            </li>
+                        class="nav-item">
+                    <a class="nav-link" href="login.html">Login</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -93,11 +93,17 @@
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
+    // Function to update icon size based on zoom level
+    function updateIconSize() {
+        var zoomLevel = map.getZoom();
+        var newSize = 24 + (zoomLevel - 12) * 4; // Adjust size based on zoom level
+        treeIcon.options.iconSize = [newSize, newSize];
+    }
+
     // Add custom icon for tree marker
     var treeIcon = L.divIcon({
         className: 'custom-icon',
-        html: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path d="M12 2c-3.54 0-6.412 2.547-6.912 5.875-.158.955.056 2.035.625 3.125.635 1.035 1.51 1.943 2.562 2.874l3.66 3.234c.282.25.66.391 1.062.391s.78-.141 1.062-.391l3.66-3.234c1.052-.93 1.927-1.839 2.562-2.874.57-1.09.782-2.17.625-3.125-.5-3.328-3.372-5.875-6.912-5.875zm0 1c3.256 0 5.895 2.682 5.895 6 0 .955-.337 1.82-.952 2.636-.593.779-1.383 1.484-2.343 2.184l-3.602 3.183-3.602-3.183c-.96-.7-1.75-1.405-2.343-2.184-.615-.815-.952-1.68-.952-2.636 0-3.318 2.639-6 5.895-6zm0 3c-.668 0-1.249.334-1.618.844-.37-.51-.95-.844-1.618-.844-1.655 0-3 1.345-3 3 0 .584.179 1.125.485 1.594l2.64 3.21c.183.221.42.336.675.336s.492-.115.675-.336l2.64-3.21c.306-.469.485-1.01.485-1.594 0-1.655-1.345-3-3-3z"/></svg>'
-    });
+        html: '<?xml version="1.0" ?><svg height="72.779755" id="svg8" version="1.1" viewBox="0 0 15.54171 19.256311" width="58.740318" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs2"><clipPath clipPathUnits="userSpaceOnUse" id="clipPath23"><rect height="170.00711" id="rect25" style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.97641512" transform="rotate(90)" width="263.84616" x="6.7847877" y="110.36194"/></clipPath></defs><g id="layer1" transform="translate(20.440439,-562.67295)"><rect height="58.184261" id="rect8011" ry="1.1433572" style="opacity:1;fill:none;fill-opacity:1;stroke:none;stroke-width:1.10699999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" width="150.11761" x="-377.22021" y="-198.90477"/></g><g id="g8681" transform="translate(20.440439,-562.67295)"><rect height="58.184261" id="rect8677" ry="1.1433572" style="opacity:1;fill:none;fill-opacity:1;stroke:none;stroke-width:1.10699999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" width="150.11761" x="-377.22021" y="-198.90477"/></g><g id="g9233" transform="translate(20.440439,-562.67295)"><rect height="58.184261" id="rect9229" ry="1.1433572" style="opacity:1;fill:none;fill-opacity:1;stroke:none;stroke-width:1.10699999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" width="150.11761" x="-377.22021" y="-198.90477"/><rect height="368.83194" id="rect9311" ry="1.1433572" style="opacity:1;fill:none;fill-opacity:1;stroke:none;stroke-width:1.10699999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" width="313.2399" x="-594.38983" y="-161.63449"/><ellipse cx="-12.584727" cy="581.61816" id="path981-7-0-6-1-3-8-1-1-9-4" rx="3.877409" ry="0.31109855" style="opacity:1;fill:#b3b3b3;fill-opacity:1;stroke:none;stroke-width:0.79707766;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"/><path d="m -14.880006,581.25993 h 4.700133" id="path977-8-5-8-4-7-9-1-2-3-0" style="opacity:1;fill:none;fill-opacity:1;stroke:#241f1c;stroke-width:0.51981038;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"/><path d="m -12.9673,581.12637 -0.03555,-10.57639 1.16988,-1.1e-4 0.06837,10.56744 z" id="path979-8-6-6-8-0-8-6-3-4-6-7" style="opacity:1;fill:#784421;fill-opacity:1;stroke:#241f1c;stroke-width:0.64406514;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"/><path d="m 393.15348,159.08893 c 2.33057,1.58479 3.29069,8.13676 3.81804,10.90534 0.52734,2.76859 2.04306,9.21473 0.45827,11.5453 -1.58479,2.33058 -8.13676,3.29069 -10.90534,3.81804 -2.76858,0.52735 -9.21472,2.04307 -11.5453,0.45827 -2.33057,-1.58479 -3.29069,-8.13676 -3.81804,-10.90534 -0.52735,-2.76858 -2.04306,-9.21472 -0.45827,-11.5453 1.58479,-2.33057 8.13676,-3.29068 10.90534,-3.81803 2.76858,-0.52735 9.21472,-2.04307 11.5453,-0.45828 z" id="path7154-0-2" style="opacity:1;fill:#2ca02c;fill-opacity:1;stroke:#241f1c;stroke-width:2.95041895;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" transform="matrix(0.33946247,0.06220382,-0.06220382,0.33946247,-129.6019,489.80961)"/><path d="m 393.15348,159.08893 c 2.33057,1.58479 3.29069,8.13676 3.81804,10.90534 0.52734,2.76859 2.04306,9.21473 0.45827,11.5453 -1.58479,2.33058 -8.13676,3.29069 -10.90534,3.81804 -2.76858,0.52735 -9.21472,2.04307 -11.5453,0.45827 -2.33057,-1.58479 -3.29069,-8.13676 -3.81804,-10.90534 -0.52735,-2.76858 -2.04306,-9.21472 -0.45827,-11.5453 1.58479,-2.33057 8.13676,-3.29068 10.90534,-3.81803 2.76858,-0.52735 9.21472,-2.04307 11.5453,-0.45828 z" id="path7154-0" style="opacity:1;fill:#37c837;fill-opacity:1;stroke:#241f1c;stroke-width:2.95041895;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" transform="matrix(0.33946247,0.06220382,-0.06220382,0.33946247,-132.52507,485.29571)"/><path d="m 393.15348,159.08893 c 2.33057,1.58479 3.29069,8.13676 3.81804,10.90534 0.52734,2.76859 2.04306,9.21473 0.45827,11.5453 -1.58479,2.33058 -8.13676,3.29069 -10.90534,3.81804 -2.76858,0.52735 -9.21472,2.04307 -11.5453,0.45827 -2.33057,-1.58479 -3.29069,-8.13676 -3.81804,-10.90534 -0.52735,-2.76858 -2.04306,-9.21472 -0.45827,-11.5453 1.58479,-2.33057 8.13676,-3.29068 10.90534,-3.81803 2.76858,-0.52735 9.21472,-2.04307 11.5453,-0.45828 z" id="path7154-0-2-2" style="opacity:1;fill:#5fd35f;fill-opacity:1;stroke:#241f1c;stroke-width:2.95041895;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" transform="matrix(0.33946247,0.06220382,-0.06220382,0.33946247,-135.03507,489.80961)"/></g></svg>'  });
 
     // Add markers for trees
     var trees = [
@@ -110,6 +116,14 @@
         L.marker([tree.lat, tree.lng], { icon: treeIcon }).addTo(map)
             .bindPopup(tree.name);
     });
+
+    // Update icon size on zoom
+    map.on('zoom', function() {
+        updateIconSize();
+    });
+
+    // Initial call to set icon size
+    updateIconSize();
 </script>
 <!-- Footer -->
 <footer>
