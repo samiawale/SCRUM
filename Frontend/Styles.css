@@ -5,6 +5,15 @@ body {
     font-family: 'Lora', serif;
   }
   
+  header {
+    color: #fff;
+    padding: 20px 0;
+  }
+  
+  h1{
+    font-family: 'Lora', serif;
+    font-size: 52px;
+  }
   .navbar {
     background-color: #4cae4c; /* Darker green navbar */
   }
