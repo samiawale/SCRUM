@@ -1,6 +1,6 @@
-from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.shortcuts import render
 from django.http import JsonResponse 
 # from loguru import logger
 from datetime import datetime
@@ -8,8 +8,15 @@ from .models import Tree
 from .serializers import TreeSerializer
 from .serializers import UserSerializer
 from django.contrib.auth.hashers import make_password  # Import make_password function
-from .models import User, Tree
+from .models import User
 from rest_framework import status
+import jwt
+from datetime import datetime, timedelta
+from django.contrib.auth import authenticate
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.hashers import check_password
+
+
 # from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 
@@ -72,28 +79,45 @@ def tree_mark(request):
     
    
 @api_view(['POST'])
-def register_action(request): 
+def register_action(request):
     # Serialize the request data
     serializer = UserSerializer(data=request.data)
     
     # Check if data is valid
     if serializer.is_valid():
+        # Save the user
+        user = serializer.save()
         
-        serializer.save()
-        user = User.objects.get(username=request.data['username'])
-        user.set_password(request.data['password'])
+        password = make_password(request.data['password'])
+        user.password = password
         user.save()
 
-        # Try to retrieve an existing token for the user
-        token = Token.objects.filter(user=user).first()
+        # Generate JWT token
+        token = generate_jwt_token(user)
 
-        # If no token exists, create a new one
-        if not token:
-            token = Token.objects.create(user=user)  
-        
         # Return response with serialized user data and token
-        return Response({'user': serializer.data, 'token': token.key}, status=status.HTTP_201_CREATED)
+        return Response({'user': serializer.data, 'token': token}, status=status.HTTP_201_CREATED)
     
     # If data is not valid, return error response
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+def generate_jwt_token(user):
+    # Set the expiration time for the token
+    expiration_time = datetime.utcnow() + timedelta(days=1)  # Token valid for 1 day
+
+    # Define the payload for the token
+    payload = {
+        'user_id': user.id,
+        'username': user.username,
+        'exp': expiration_time
+    }
+
+    # Generate the JWT token
+    token = jwt.encode(payload, '0zoAMXlVewTJLjbzCbXGym5Ag1jYH8ZJ', algorithm='HS256')
+
+    return token
+       
 

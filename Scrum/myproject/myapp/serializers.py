@@ -11,8 +11,11 @@ class TreeSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    class Meta(object):
+    class Meta:
         model = User
-        fields = ['id','username','role', 'first_name', 'last_name', 'password','phone']
+        fields = ['id', 'username', 'role', 'first_name', 'last_name', 'phone']
+        extra_kwargs = {
+            'password': {'write_only': True},  # Exclude from serialization
+        }
 
 

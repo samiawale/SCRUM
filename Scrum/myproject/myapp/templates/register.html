@@ -44,11 +44,7 @@
               <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" class="form-control" id="username" placeholder="Enter your username">
-              </div>
-              <div class="form-group">
-                <label for="email">Email Address:</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter your email address">
-              </div>
+              </div> 
               <div class="form-group">
                 <label for="phoneNumber">Phone Number:</label>
                 <input type="tel" class="form-control" id="phoneNumber" placeholder="Enter your phone number">
@@ -61,7 +57,7 @@
                 <label for="confirmPassword">Confirm Password:</label>
                 <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password">
               </div>
-              <a  class="btn btn-primary btn-block" href="#">Submit</button>
+              <a  class="btn btn-primary btn-block" href="#" id="submit_login">Submit</button>
               <a class="btn btn-register btn-block" href="{% url 'login_view' %}">Login</a>
             </form>
           </div>
@@ -74,6 +70,99 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   <!-- SweetAlert2 JS -->
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+  <script> 
+
+      $(document).ready(function () { 
+
+          $('#submit_login').on('click', function (e) {
+              e.preventDefault(); // Prevent default form submission 
+              
+              var username  = $('#username').val();
+              var password  = $('#password').val();
+              var confirmPassword  = $('#confirmPassword').val(); 
+              var firstname = $('#firstName').val();
+              var lastname  = $('#lastName').val();
+              var phone  = $('#phoneNumber').val();
+
+              if(password != confirmPassword) {
+                  Swal.fire({
+                      title: 'Alert!',
+                      text: "Oops! It seems the passwords you've entered don't match with repeat password",
+                      icon: 'warning',
+                      showConfirmButton: true,
+                      confirmButtonText: 'OK'
+                  });
+              }
+
+
+              // Make AJAX POST request to login API
+              $.ajax({
+                  url: 'http://127.0.0.1:8000/register-post', // Replace with your actual login endpoint
+                  method: 'POST',
+                  data: {
+                      username: username,
+                      password: password,
+                      role: "customer", 
+                      first_name: firstname,
+                      last_name: lastname,
+                      phone: phone,
+                  },
+                  success: function (response) {
+                      // Handle successful login response
+
+                      var token = response.token;  
+                      var user_data = JSON.stringify(response.user) 
+                      localStorage.setItem('Authorization', token); 
+                      localStorage.setItem('User_Data', user_data); 
+
+                      Swal.fire({
+                      title: 'Alert!',
+                      text: 'Registration Successful.',
+                      icon: 'info',
+                      confirmButtonText: 'Okay'
+                      }).then((result) => {
+                          if (result.isConfirmed) {
+                              window.location.href = "http://127.0.0.1:8000/home"; // Redirect to Home page
+                          }
+                      }); 
+
+                      // Redirect or perform actions based on the response
+                  },
+                  error: function (xhr, status, error) {
+                      
+                      if (xhr.responseJSON) {
+                          var errors = xhr.responseJSON;
+
+                          var errorMessage = "<b>Signup failed due to the following errors:</b><br>";
+                          for (var key in errors) {
+                              errorMessage += `<b>${key}:</b> ${errors[key][0]}<br>`; // Displaying the first error for each field
+                          }
+
+                          Swal.fire({
+                              title: 'Validation Error!',
+                              html: errorMessage,
+                              icon: 'error',
+                              confirmButtonText: 'Okay'
+                          });
+                      } else {
+                          // If there are other types of errors or the structure is unexpected
+                          // Show a general error message or perform other actions
+                      }
+                  }
+              });
+
+                                
+            
+
+              
+          });
+      });
+  </script>
 
 </body>
 
