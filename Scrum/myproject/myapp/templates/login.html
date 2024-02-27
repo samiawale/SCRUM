@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-  
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +16,7 @@
   <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-6">
-        <img id="login-logo" <img id="logo" src="{% static 'img/logo.png/' %}" alt="Description"class="img-fluid d-block mx-auto mb-4">
+        <img id="login-logo" src="{% static 'img/logo.png/' %}" alt="Logo" class="img-fluid d-block mx-auto mb-4">
         <!-- Replace "your-logo.png" with the path to your logo image -->
 
         <div class="card">
@@ -25,7 +24,7 @@
             <h3 class="text-center">Login</h3>
           </div>
           <div class="card-body">
-            <form>
+            <form id="loginForm">
               <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" class="form-control" id="username" placeholder="Enter your username">
@@ -34,7 +33,7 @@
                 <label for="password">Password:</label>
                 <input type="password" class="form-control" id="password" placeholder="Enter your password">
               </div>
-              <a class="btn btn-primary btn-block" href="#">Submit</a>
+              <button type="submit" class="btn btn-primary btn-block">Submit</button>
               <a class="btn btn-register btn-block" href="{% url 'register_view' %}">Register</a>
             </form>
           </div>
@@ -43,11 +42,53 @@
     </div>
   </div>
 
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <!-- Bootstrap JS and dependencies (optional) -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- SweetAlert2 JS for beautiful alerts -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script> 
+    $(document).ready(function () {
+      $('#loginForm').on('submit', function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        var username = $('#username').val();
+        var password = $('#password').val();
+
+        // Make AJAX POST request to login API
+        $.ajax({
+          url: 'http://127.0.0.1:8000/login-post', // Replace with your actual login endpoint
+          method: 'POST',
+          contentType: "application/json",
+          dataType: "json",
+          data: JSON.stringify({
+            username: username,
+            password: password
+          }),
+          success: function (response) {
+            // Handle successful login response
+            // Assuming response contains a token or similar for session management
+            localStorage.setItem('Authorization', response.token); // Save token or session info as needed
+
+            // Redirect to another page after successful login
+            window.location.href = "http://127.0.0.1:8000/Auftrag"; // Adjusting URL after success
+          },
+          error: function (xhr, status, error) {
+            // Handle login error (e.g., invalid credentials)
+            Swal.fire({
+              title: 'Login Failed',
+              text: 'Please check your username and password and try again.',
+              icon: 'error',
+              confirmButtonText: 'Ok'
+            });
+          }
+        });
+      });
+    });
+  </script>
 
 </body>
-
 </html>
