@@ -16,7 +16,9 @@
   <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-6">
-        <img id="login-logo" src="logo.png" alt="Logo" class="img-fluid d-block mx-auto mb-4">
+        <a href="index.html"> <!-- Adjust the href to your home page's URL -->
+          <img id="logo" src="logo.png" alt="Logo">
+      </a>
         <!-- Ersetzen Sie "your-logo.png" durch den Pfad zu Ihrem Logo-Bild -->
 
         <div class="card">
@@ -90,7 +92,32 @@
       }
     });
   </script>
-
+<footer>
+  <div class="container-footer">
+      <div class="row">
+          <div class="col-md-6">
+              <p>&copy; 2024 Stadtgarten und Friedhöfe</p>
+          </div>
+          <div class="col-md-6">
+              <p>
+                  <a href="#" class="footer-link">About Us</a>
+                  <a href="javascript:void(0)" class="footer-link" onclick="toggleContact()">Contact Us</a>
+                  <div id="contact-info" style="display: none;">
+                      <!-- Your contact information goes here -->
+                      <p>Email: contact@example.com</p>
+                      <p>Phone: +123 456 789</p>
+                  </div>
+                  
+              </p>
+              <p>
+                  <a href="#" class="footer-icon"><img src="facebook_logo.png" alt="Facebook"></a>
+                  <a href="#" class="footer-icon"><img src="instagram_logo.png" alt="Instagram"></a>
+                  <a href="#" class="footer-icon"><img src="x_logo.png" alt="X"></a>
+              </p>
+          </div>
+      </div>
+  </div>
+</footer>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-/* Custom CSS for Stadtgarten und Friedhöfer */
+/* Custom CSS for Stadtgarten und Friedhöfe*/
 body {
     background-color: #5cb85c; /* Green background color */
     color: #fff;
@@ -180,6 +180,7 @@ label {
   height: auto; /* Maintain aspect ratio */
   margin-right: 10px; /* Adjust spacing between icons */
   position: relative;
+  border-radius: 50%;
 }
 
 .btn-secondary {
@@ -267,7 +268,8 @@ label {
 }
 
 .table-container {
-  margin: auto;
+  margin-left: 50px;
+  margin-bottom: 20px;
 }
 
 table {
