@@ -28,7 +28,7 @@
  var trees = [
      { lat: 52.135533, lng: 11.627624, name: 'Baum 1' },
      { lat: 52.158533, lng: 11.627624, name: 'Baum 2' },
-     { lat: 52.1490533, lng: 11.627624, name: 'Baum 3' , imageUrl: 'x_logo.png' },
+     { lat: 52.1490533, lng: 11.627624, name: 'Baum 3' , imageUrl: 'Baeume_Esche_Eichstegen-768x512popo.png' },
      { lat: 52.136533, lng: 11.627624, name: 'Baum 8' },
      { lat: 52.137533, lng: 11.628624, name: 'Baum 9' },
      { lat: 52.138533, lng: 11.629624, name: 'Baum 10' },
