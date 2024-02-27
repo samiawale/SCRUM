@@ -1,7 +1,8 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from django.shortcuts import render
+from django.shortcuts import render 
 from django.http import JsonResponse 
+
 # from loguru import logger
 from datetime import datetime
 from .models import Tree
@@ -10,6 +11,7 @@ from .serializers import UserSerializer
 from django.contrib.auth.hashers import make_password  # Import make_password function
 from .models import User
 from rest_framework import status
+# from django.contrib.auth.models import User 
 import jwt
 from datetime import datetime, timedelta
 from django.contrib.auth import authenticate
@@ -17,12 +19,6 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.hashers import check_password
 
 
-# from django.contrib.auth.models import User
-from rest_framework.authtoken.models import Token
-
-def index(request):
-    all_trees = Tree.objects.all
-    return render(request, 'index.html',{all: all_trees})
 
 @api_view(['POST'])
 def login(request):
@@ -46,20 +42,14 @@ def login(request):
 def test_token(request):
     return Response({})
 
-#def home(request): 
-#    trees = Tree.objects.all()
-#    return render(request, 'index.html',{'trees':trees})
-
-def test_site(request):
-    return render(request,'test_site.html')
+def home(request): 
+    return render(request, 'index.html')
 
 def register_view(request): 
      return render(request, 'register.html')
 
 def login_view(request): 
      return render(request, 'login.html')
-
-
 
 @api_view(['POST'])
 def tree_mark(request): 
@@ -76,6 +66,28 @@ def tree_mark(request):
 
    # Return a response with the serialized Tree object
    return Response({'message': 'Data inserted successfully', 'tree': serializer.data})
+
+
+@api_view(['POST'])
+def login_action(request):
+    username = request.data.get('username')
+    password = request.data.get('password')
+    
+    user = get_object_or_404(User, username=username)
+    
+    if not check_password(password, user.password):
+        # Return error response
+        return Response({'error': 'Invalid username or password'}, status=status.HTTP_401_UNAUTHORIZED) 
+    else:
+        # Generate JWT token
+        token = generate_jwt_token(user)
+        
+        serializer = UserSerializer(instance=user)    
+        
+        # Return user data and token
+        return Response({'user': serializer.data, 'token': token}, status=status.HTTP_200_OK)
+
+        
     
    
 @api_view(['POST'])
@@ -120,4 +132,8 @@ def generate_jwt_token(user):
 
     return token
        
+def auftrag_view(request):
+    # If you want to redirect to 'login.html', you can do so here
+   return render (request,'auftrag_view')
+
 

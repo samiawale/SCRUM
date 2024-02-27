@@ -24,10 +24,13 @@ urlpatterns = [
     path('test_token/', views.test_token, name='test_token'),
     path('register/', views.register_view, name='register_view'),
     path('login/', views.login_view, name='login_view'),
+    path('Auftrag/', views.auftrag_view, name='auftrag'),
+   
     
     
 
     path('tree-mark', views.tree_mark, name='tree_mark'),
     path('register-post', views.register_action, name='register_post'),
     path('login-post', views.login_action, name='login_post'),
+
 ]
