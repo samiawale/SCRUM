@@ -18,6 +18,10 @@
     <link rel="stylesheet" href="./dist/MarkerCluster.Default.css">
 
 
+    <!-- MarkerCluster -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -85,7 +89,7 @@
 <script src="./dist/leaflet.markercluster.js"></script>
 <script>
     // Define bounds for Magdeburg, Germany
-    var magdeburgBounds = L.latLngBounds([52.0625, 11.5519], [52.1754, 11.7563]);
+    var magdeburgBounds = L.latLngBounds([48.0625, 8.5519], [55.1754, 15.7563]);
 
     var map = L.map('map', {
         center: [52.120533, 11.627624],
