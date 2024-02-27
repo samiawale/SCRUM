@@ -229,4 +229,39 @@ label {
   background-color: #f2f2f2;
 }
 
+.pflanze-anleitung-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.pflanze-anleitung-header {
+  background-color: #4cae4c;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+.pflanze-anleitung-header h1 {
+  margin: 0;
+}
+
+.pflanze-anleitung-content {
+  padding: 20px;
+}
+
+.pflanze-anleitung-content h2 {
+  color: #4cae4c;
+}
+
+.pflanze-anleitung-content ol {
+  margin-bottom: 20px;
+}
+
+.pflanze-anleitung-content a {
+  color: #4cae4c;
+  text-decoration: underline;
+}
+
+/* Add more styles as needed */
+
 
