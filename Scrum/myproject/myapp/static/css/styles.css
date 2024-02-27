@@ -2,40 +2,25 @@
 body {
     background-color: #5cb85c; /* Green background color */
     color: #fff;
-    font-family: 'Lora', serif;
   }
   
   .navbar {
     background-color: #4cae4c; /* Darker green navbar */
   }
-  /* Add this in your styles.css file or within the <style> tag in the head section */
-
-
+  
   .jumbotron {
     background-color: #4cae4c; /* Darker green jumbotron */
     color: #fff;
     padding: 2rem;
     margin-bottom: 2rem;
     border-radius: 15px;
-    font-family: 'Lora', serif;
   }
   
   .container {
     margin-top: 2rem;
     
   }
-  footer {
-    background-color: #4cae4c; /* Darker green footer background */
-    color: #fff;
-    text-align: center;
-    padding: 20px 0;
-}
-
-footer a {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 10px;
-}
+  
   #treeImage {
     max-width: 100%;
     height: auto;
@@ -53,23 +38,19 @@ footer a {
     color: #fff;
   }
   
+  #map {
+    height: 600px;
+    margin: 50px;
+  }
+  
   /* Custom CSS for Meine Baumkarte */
   #map {
     height: 600px;
     margin: 50px;
-    border: 1px;
-    outline: auto;
-    outline-color: #000;
-    outline-offset: 0.01cm;
   }
 
 
 /* Additional styles for login page */
-#login-logo {
-  max-width: 150px;
-  height: auto;
-  margin-top: 10px;
-}
 .login-container {
   background-color: #fff; /* White background color for the login container */
   padding: 40px; /* Increased padding for more contrast */
@@ -89,8 +70,6 @@ footer a {
   border: 2px solid #4cae4c; /* Border color for the card */
   border-radius: 10px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adjusted box-shadow for more contrast */
-  margin-top: 50px;
-  margin-bottom: 50px;
 }
 
 .card-header {
@@ -124,41 +103,4 @@ label {
   border-color: #398439;
 }
 
-.btn-register {
-  background-color: #0099ff; /* Green button for registration */
-  border-color: #0099ff;
-  color: #fff;
-}
-
-.btn-register:hover {
-  background-color: #006cb5; /* Green button for registration on hover */
-  border-color: #006cb5;
-  color: #fff;  
-}
-/* Assuming you have Bootstrap included for styling */
-
-.container-footer {
-  background-color: #4cae4c; /* Choose your preferred background color */
-  padding: 10px; /* Adjust the padding as needed */
-  color: #fff; /* Text color for links and icons */
-  size: max 100%;
-  position: relative;
-}
-
-.footer-link {
-  color: #fff; /* Link text color */
-  margin-right: 20px; /* Adjust spacing between links */
-  text-decoration: none;
-}
-
-.footer-link:hover {
-  text-decoration: underline; /* Add underline on hover */
-}
-
-.footer-icon img {
-  width: 50px; /* Adjust the icon size as needed */
-  height: auto; /* Maintain aspect ratio */
-  margin-right: 10px; /* Adjust spacing between icons */
-  position: relative;
-  border-radius: 100cm;
-}
+  
