@@ -1,1 +1,158 @@
-<h1>Hello world!</h1>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stadtgarten und Friedhöfer</title>
+    {% load static %}
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+        <img id="logo" src="{% static 'img/logo.png/' %}" alt="Description"><!-- Replace "logo.png" with your actual logo image -->
+        <a class="navbar-brand" href="#">Stadtgarten und Friedhöfer</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Plant Trees</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Water Trees</a>
+                </li>
+                <li
+                    class="nav-item">
+
+                {% comment %} <a class="nav-link" href="{% url 'register_view' %}">Register</a> {% endcomment %}
+                <a class="nav-link" href="{% url 'login_view' %}">Login</a>
+
+            </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Jumbotron -->
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-4">Willkommen bei Stadtgarten und Friedhöfer</h1>
+        <p class="lead">Ein Ort, um Bäume zu pflanzen und zu gießen für eine grünere Stadt.</p>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container">
+    <h2>Bäume pflanzen</h2>
+    <p>Klicken Sie auf den Button unten, um einen Baum zu pflanzen:</p>
+    <button class="btn btn-success">Baum pflanzen</button>
+
+    <hr>
+
+    <h2>Bäume gießen</h2>
+    <p>Klicken Sie auf den Button unten, um die gepflanzten Bäume zu gießen:</p>
+    <button id="waterButton" class="btn">Bäume gießen</button>
+
+    <hr>
+
+    <h2>Baumpflege Tipps</h2>
+    <p>Sorgen Sie dafür, dass Sie Ihre Bäume regelmäßig gießen und ihnen die richtige Pflege geben, um ihr gesundes Wachstum zu gewährleisten.</p>
+
+    <!-- Leaflet Map -->
+    <div id="map" style="height: 600px; margin-top: 20px;"></div>
+</div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    // Define bounds for Magdeburg, Germany
+    var magdeburgBounds = L.latLngBounds([52.0625, 11.5519], [52.1754, 11.7563]);
+
+    var map = L.map('map', {
+        center: [52.120533, 11.627624],
+        zoom: 12,
+        maxBounds: magdeburgBounds, // Set maximum bounds for the map
+        minZoom: 12 // Set minimum zoom level to avoid zooming out of bounds
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Add custom icon for tree marker
+    var treeIcon = L.divIcon({
+        className: 'custom-icon',
+        html: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path d="M12 2c-3.54 0-6.412 2.547-6.912 5.875-.158.955.056 2.035.625 3.125.635 1.035 1.51 1.943 2.562 2.874l3.66 3.234c.282.25.66.391 1.062.391s.78-.141 1.062-.391l3.66-3.234c1.052-.93 1.927-1.839 2.562-2.874.57-1.09.782-2.17.625-3.125-.5-3.328-3.372-5.875-6.912-5.875zm0 1c3.256 0 5.895 2.682 5.895 6 0 .955-.337 1.82-.952 2.636-.593.779-1.383 1.484-2.343 2.184l-3.602 3.183-3.602-3.183c-.96-.7-1.75-1.405-2.343-2.184-.615-.815-.952-1.68-.952-2.636 0-3.318 2.639-6 5.895-6zm0 3c-.668 0-1.249.334-1.618.844-.37-.51-.95-.844-1.618-.844-1.655 0-3 1.345-3 3 0 .584.179 1.125.485 1.594l2.64 3.21c.183.221.42.336.675.336s.492-.115.675-.336l2.64-3.21c.306-.469.485-1.01.485-1.594 0-1.655-1.345-3-3-3z"/></svg>'
+    });
+
+    // Add markers for trees
+    var trees = [
+        { lat: 52.135533, lng: 11.627624, name: 'Baum 1' },
+        { lat: 52.158533, lng: 11.627624, name: 'Baum 2' },
+        { lat: 52.1490533, lng: 11.627624, name: 'Baum 3' }
+    ];
+
+    trees.forEach(function(tree) {
+        L.marker([tree.lat, tree.lng], { icon: treeIcon }).addTo(map)
+            .bindPopup(tree.name);
+
+        var marker = L.marker([tree.lat, tree.lng], { icon: treeIcon }).addTo(map);
+        marker.treeName = tree.name; // Add the tree name as a property of the marker
+
+        // Bind click event listener to the marker
+        marker.on('click', function(e) {
+
+            var tree_data = {
+                lat: "John",
+                lng: 30,
+                name: "New York"
+            };
+
+            alert("Tree Name: " + e.target.treeName);
+        });
+    }); 
+
+</script>
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p>&copy; 2024 Stadtgarten und Friedhöfer</p>
+            </div>
+            <div class="col-md-6">
+                <p>
+                    <a href="#" class="footer-link">About Us</a>
+                    <a href="#" class="footer-link">Contact Us</a>
+                </p>
+                <p>
+                    <a href="#" class="footer-icon"><img src="facebook_logo.png" alt="Facebook"></a>
+                    <a href="#" class="footer-icon"><img src="instagram_logo.png" alt="Instagram"></a>
+                    <a href="#" class="footer-icon"><img src="x_logo.png" alt="X"></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Bootstrap JS (optional, for some functionalities) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
