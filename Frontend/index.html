@@ -13,6 +13,10 @@
 
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- MarkerCluster -->
+    <link rel="stylesheet" href="./dist/MarkerCluster.css">
+    <link rel="stylesheet" href="./dist/MarkerCluster.Default.css">
+
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
@@ -78,6 +82,7 @@
 
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="./dist/leaflet.markercluster.js"></script>
 <script>
     // Define bounds for Magdeburg, Germany
     var magdeburgBounds = L.latLngBounds([52.0625, 11.5519], [52.1754, 11.7563]);
@@ -109,21 +114,52 @@
     var trees = [
         { lat: 52.135533, lng: 11.627624, name: 'Baum 1' },
         { lat: 52.158533, lng: 11.627624, name: 'Baum 2' },
-        { lat: 52.1490533, lng: 11.627624, name: 'Baum 3' }
+        { lat: 52.1490533, lng: 11.627624, name: 'Baum 3' },
+        { lat: 52.136533, lng: 11.627624, name: 'Baum 8' },
+        { lat: 52.137533, lng: 11.628624, name: 'Baum 9' },
+        { lat: 52.138533, lng: 11.629624, name: 'Baum 10' },
+        { lat: 52.139533, lng: 11.630624, name: 'Baum 11' },
+        { lat: 52.140533, lng: 11.631624, name: 'Baum 12' },
+        { lat: 52.141533, lng: 11.632624, name: 'Baum 13' },
+        { lat: 52.142533, lng: 11.633624, name: 'Baum 14' },
+        { lat: 52.143533, lng: 11.634624, name: 'Baum 15' },
+        { lat: 52.144533, lng: 11.635624, name: 'Baum 16' },
+        { lat: 52.145533, lng: 11.636624, name: 'Baum 17' },
+        { lat: 52.146533, lng: 11.637624, name: 'Baum 18' },
+        { lat: 52.147533, lng: 11.638624, name: 'Baum 19' },
+        { lat: 52.148533, lng: 11.639624, name: 'Baum 20' },
+        { lat: 52.149533, lng: 11.640624, name: 'Baum 21' },
+        { lat: 52.150533, lng: 11.641624, name: 'Baum 22' },
+        { lat: 52.151533, lng: 11.642624, name: 'Baum 23' },
+        { lat: 52.152533, lng: 11.643624, name: 'Baum 24' },
+        { lat: 52.153533, lng: 11.644624, name: 'Baum 25' },
+        { lat: 52.154533, lng: 11.645624, name: 'Baum 26' },
+        { lat: 52.155533, lng: 11.646624, name: 'Baum 27' },
+        { lat: 52.156533, lng: 11.647624, name: 'Baum 28' },
+        { lat: 52.157533, lng: 11.648624, name: 'Baum 29' },
+        { lat: 52.158533, lng: 11.649624, name: 'Baum 30' },
+        { lat: 52.159533, lng: 11.650624, name: 'Baum 31' },
+        { lat: 52.160533, lng: 11.651624, name: 'Baum 32' },
+        { lat: 52.161533, lng: 11.652624, name: 'Baum 33' },
+        { lat: 52.162533, lng: 11.653624, name: 'Baum 34' },
+        { lat: 52.163533, lng: 11.654624, name: 'Baum 35' },
+        { lat: 52.164533, lng: 11.655624, name: 'Baum 36' },
+        { lat: 52.165533, lng: 11.656624, name: 'Baum 37' },
+        { lat: 52.166533, lng: 11.657624, name: 'Baum 38' },
+        { lat: 52.167533, lng: 11.658624, name: 'Baum 39' },
+        { lat: 52.168533, lng: 11.659624, name: 'Baum 40' },
     ];
 
+
+
+    var markers = L.markerClusterGroup();
+
     trees.forEach(function(tree) {
-        L.marker([tree.lat, tree.lng], { icon: treeIcon }).addTo(map)
-            .bindPopup(tree.name);
+        var marker = L.marker([tree.lat, tree.lng]).bindPopup(tree.name);
+        markers.addLayer(marker);
     });
 
-    // Update icon size on zoom
-    map.on('zoom', function() {
-        updateIconSize();
-    });
-
-    // Initial call to set icon size
-    updateIconSize();
+    map.addLayer(markers);
 </script>
 <!-- Footer -->
 <footer>
