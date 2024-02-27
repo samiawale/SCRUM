@@ -46,9 +46,8 @@ def login(request):
 def test_token(request):
     return Response({})
 
-#def home(request): 
-#    trees = Tree.objects.all()
-#    return render(request, 'index.html',{'trees':trees})
+def home(request):
+    return render(request,'index.html')
 
 def test_site(request):
     return render(request,'test_site.html')
