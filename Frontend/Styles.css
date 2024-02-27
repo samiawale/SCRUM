@@ -46,6 +46,7 @@ footer a {
     max-width: 100px;
     height: auto;
     margin-right: 10px;
+    border-radius: 10cm;
   }
   
   #waterButton {
@@ -53,15 +54,14 @@ footer a {
     color: #fff;
   }
   
-  #map {
-    height: 600px;
-    margin: 50px;
-  }
-  
   /* Custom CSS for Meine Baumkarte */
   #map {
     height: 600px;
     margin: 50px;
+    border: 1px;
+    outline: auto;
+    outline-color: #000;
+    outline-offset: 0.01cm;
   }
 
 
@@ -186,3 +186,38 @@ label {
   border-color: #5a6268;
   color: #fff;
 }
+
+#taskList {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  position: relative;
+  margin: auto;
+  width: 75%
+}
+
+#tasks {
+  list-style-type: none;
+  padding: 20px;
+  margin: 20px;
+  position: relative;
+  margin: auto;
+  width: 75%;
+}
+
+#tasks li {
+  background-color:#fff;
+  padding: 10px;
+  margin-bottom: 5px;
+  width: 75%;
+  position: relative;
+  margin: auto;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+#tasks li:hover {
+  background-color: #f2f2f2;
+}
+
+
