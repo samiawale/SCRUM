@@ -59,6 +59,34 @@ def register_view(request):
 def login_view(request): 
      return render(request, 'login.html')
 
+#code to retrieve trees from database
+
+@api_view(['GET','Post'])
+def tree_list(request):
+    if request.method =='GET':
+        tree = Tree.objects.all()
+        serializer = TreeSerializer(tree,many=True)
+        return JsonResponse(serializer.data,safe=False)
+    if request.method == 'POST':
+        serializer = TreeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status = status.HTTP_201_CREATED)
+        
+@api_view(['GET','PUT','DELETE'])
+def tree_detail(request,id):
+    try: 
+        tree = Tree.objects.get(pk=id)
+    except Tree.DoesNotExist:
+        return Response(status = status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'GET':
+        serializer = TreeSerializer(tree)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        pass
+    elif request.method == 'DELETE':
+        pass
 
 
 @api_view(['POST'])
