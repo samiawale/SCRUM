@@ -8,13 +8,14 @@ from .models import Tree
 from .serializers import TreeSerializer
 from .serializers import UserSerializer
 from django.contrib.auth.hashers import make_password  # Import make_password function
-from .models import User
+from .models import User, Tree
 from rest_framework import status
 # from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 
 def index(request):
-    return render(request, 'index.html',{})
+    all_trees = Tree.objects.all
+    return render(request, 'index.html',{all: all_trees})
 
 @api_view(['POST'])
 def login(request):
@@ -38,14 +39,20 @@ def login(request):
 def test_token(request):
     return Response({})
 
-def home(request): 
-    return render(request, 'index.html')
+#def home(request): 
+#    trees = Tree.objects.all()
+#    return render(request, 'index.html',{'trees':trees})
+
+def test_site(request):
+    return render(request,'test_site.html')
 
 def register_view(request): 
      return render(request, 'register.html')
 
 def login_view(request): 
      return render(request, 'login.html')
+
+
 
 @api_view(['POST'])
 def tree_mark(request): 

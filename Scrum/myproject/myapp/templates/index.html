@@ -103,7 +103,11 @@
         html: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path d="M12 2c-3.54 0-6.412 2.547-6.912 5.875-.158.955.056 2.035.625 3.125.635 1.035 1.51 1.943 2.562 2.874l3.66 3.234c.282.25.66.391 1.062.391s.78-.141 1.062-.391l3.66-3.234c1.052-.93 1.927-1.839 2.562-2.874.57-1.09.782-2.17.625-3.125-.5-3.328-3.372-5.875-6.912-5.875zm0 1c3.256 0 5.895 2.682 5.895 6 0 .955-.337 1.82-.952 2.636-.593.779-1.383 1.484-2.343 2.184l-3.602 3.183-3.602-3.183c-.96-.7-1.75-1.405-2.343-2.184-.615-.815-.952-1.68-.952-2.636 0-3.318 2.639-6 5.895-6zm0 3c-.668 0-1.249.334-1.618.844-.37-.51-.95-.844-1.618-.844-1.655 0-3 1.345-3 3 0 .584.179 1.125.485 1.594l2.64 3.21c.183.221.42.336.675.336s.492-.115.675-.336l2.64-3.21c.306-.469.485-1.01.485-1.594 0-1.655-1.345-3-3-3z"/></svg>'
     });
 
+    //pull data from tree database
+
     // Add markers for trees
+
+//
     var trees = [
         { lat: 52.135533, lng: 11.627624, name: 'Baum 1' },
         { lat: 52.158533, lng: 11.627624, name: 'Baum 2' },
@@ -113,19 +117,16 @@
     trees.forEach(function(tree) {
         L.marker([tree.lat, tree.lng], { icon: treeIcon }).addTo(map)
             .bindPopup(tree.name);
-
         var marker = L.marker([tree.lat, tree.lng], { icon: treeIcon }).addTo(map);
         marker.treeName = tree.name; // Add the tree name as a property of the marker
 
         // Bind click event listener to the marker
         marker.on('click', function(e) {
-
             var tree_data = {
                 lat: "John",
                 lng: 30,
                 name: "New York"
             };
-
             alert("Tree Name: " + e.target.treeName);
         });
     }); 

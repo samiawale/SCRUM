@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Header</title>
+</head>
+<body>
+    <h1>Test Header</h1>
+    <ul>
+        {% for item in trees %}
+            <li>{{ item.name }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
