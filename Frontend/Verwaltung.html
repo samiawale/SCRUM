@@ -26,35 +26,20 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-        <img id="logo" src="logo.png" alt="Logo">
-        <a class="navbar-brand" href="#">Stadtgarten und Friedhöfer</a>
+        <a href="index.html"> <!-- Adjust the href to your home page's URL -->
+            <img id="logo" src="logo.png" alt="Logo">
+        </a>     
+                <a class="navbar-brand" href="#">Stadtgarten und Friedhöfe</a>
         <li class="nav-item">
-            <a class="nav-link" href="index.html">Home</a>
-        </li>
+              </li>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Abmelden</a>
-                </li>
+                    <a class="nav-link" href="index.html">Abmelden</a>  
             </ul>
         </div>
     </div>
 </nav>
 
-<div class="table-container">
-    <h2>Mitarbeiter Tabelle</h2>
-    <table id="mitarbeiterTable">
-        <!-- Mitarbeiter table content will be generated using JavaScript -->
-    </table>
-</div>
-
-<div class="table-container">
-    <h2>Baum Tabelle</h2>
-    <table id="baumTable">
-        <!-- Baum table content will be generated using JavaScript -->
-    </table>
-</div>
-</div>
 
 <script src="script.js"></script>
 
@@ -74,3 +59,43 @@
 </body>
 </html>
 
+<div class="table-container">
+    <h2>Mitarbeiter Tabelle</h2>
+    <table id="mitarbeiterTable">
+        <!-- Mitarbeiter table content will be generated using JavaScript -->
+    </table>
+</div>
+
+<div class="table-container">
+    <h2>Baum Tabelle</h2>
+    <table id="baumTable">
+        <!-- Baum table content will be generated using JavaScript -->
+    </table>
+</div>
+</div>
+<footer>
+    <div class="container-footer">
+        <div class="row">
+            <div class="col-md-6">
+                <p>&copy; 2024 Stadtgarten und Friedhöfe</p>
+            </div>
+            <div class="col-md-6">
+                <p>
+                    <a href="#" class="footer-link">About Us</a>
+                    <a href="javascript:void(0)" class="footer-link" onclick="toggleContact()">Contact Us</a>
+                    <div id="contact-info" style="display: none;">
+                        <!-- Your contact information goes here -->
+                        <p>Email: contact@example.com</p>
+                        <p>Phone: +123 456 789</p>
+                    </div>
+                    
+                </p>
+                <p>
+                    <a href="#" class="footer-icon"><img src="facebook_logo.png" alt="Facebook"></a>
+                    <a href="#" class="footer-icon"><img src="instagram_logo.png" alt="Instagram"></a>
+                    <a href="#" class="footer-icon"><img src="x_logo.png" alt="X"></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
