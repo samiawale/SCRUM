@@ -115,9 +115,18 @@ label {
   color: #495057; /* Dark gray label text color */
 }
 
+/* Custom CSS for centering buttons */
+.btn-block {
+  display: block;
+  width: 50%;
+  margin: auto;
+}
+
 .btn-primary {
   background-color: #4cae4c; /* Darker green button */
   border-color: #4cae4c;
+  color: #fff;
+  margin-bottom: 5px;
 }
 
 .btn-primary:hover {
@@ -129,6 +138,7 @@ label {
   background-color: #0099ff; /* Green button for registration */
   border-color: #0099ff;
   color: #fff;
+  margin-top: 5px;
 }
 
 .btn-register:hover {
@@ -161,4 +171,18 @@ label {
   height: auto; /* Maintain aspect ratio */
   margin-right: 10px; /* Adjust spacing between icons */
   position: relative;
+}
+
+.btn-secondary {
+  background-color: #6c757d; /* Gray button for cancel */
+  border-color: #6c757d;
+  color: #fff;
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268; /* Gray button for cancel on hover */
+  border-color: #5a6268;
+  color: #fff;
 }

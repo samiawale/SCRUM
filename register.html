@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register</title>
+  <title>Registrieren</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom CSS -->
@@ -17,62 +17,65 @@
     <div class="row justify-content-center">
       <div class="col-md-6">
         <img id="login-logo" src="logo.png" alt="Logo" class="img-fluid d-block mx-auto mb-4">
-        <!-- Replace "your-logo.png" with the path to your logo image -->
+        <!-- Ersetzen Sie "your-logo.png" durch den Pfad zu Ihrem Logo-Bild -->
 
         <div class="card">
           <div class="card-header">
-            <h3 class="text-center">Register</h3>
+            <h3 class="text-center">Registrieren</h3>
           </div>
           <div class="card-body">
             <form>
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="firstName">First Name:</label>
-                    <input type="text" class="form-control" id="firstName" placeholder="Enter your first name">
+                    <label for="firstName">Vorname:</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="Geben Sie Ihren Vornamen ein">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="lastName">Last Name:</label>
-                    <input type="text" class="form-control" id="lastName" placeholder="Enter your last name">
+                    <label for="lastName">Nachname:</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="Geben Sie Ihren Nachnamen ein">
                   </div>
                 </div>
               </div>
               <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" class="form-control" id="username" placeholder="Enter your username">
+                <label for="username">Benutzername:</label>
+                <input type="text" class="form-control" id="username" placeholder="Geben Sie Ihren Benutzernamen ein">
               </div>
               <div class="form-group">
-                <label for="email">Email Address:</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter your email address">
+                <label for="email">E-Mail-Adresse:</label>
+                <input type="email" class="form-control" id="email" placeholder="Geben Sie Ihre E-Mail-Adresse ein">
               </div>
               <div class="form-group">
-                <label for="phoneNumber">Phone Number:</label>
-                <input type="tel" class="form-control" id="phoneNumber" placeholder="Enter your phone number">
+                <label for="phoneNumber">Telefonnummer:</label>
+                <input type="tel" class="form-control" id="phoneNumber" placeholder="Geben Sie Ihre Telefonnummer ein">
               </div>
               <div class="form-group">
-                <label for="password">Password:</label>
+                <label for="password">Passwort:</label>
                 <div class="input-group">
-                  <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                  <input type="password" class="form-control" id="password" placeholder="Geben Sie Ihr Passwort ein">
                   <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="showPasswordBtn">Show</button>
+                    <button class="btn btn-outline-secondary" type="button" id="showPasswordBtn">Anzeigen</button>
                   </div>
                 </div>
               </div>
               <div class="form-group">
-                <label for="confirmPassword">Confirm Password:</label>
-                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password">
+                <label for="confirmPassword">Passwort bestätigen:</label>
+                <input type="password" class="form-control" id="confirmPassword" placeholder="Bestätigen Sie Ihr Passwort">
               </div>
-              <button type="submit" class="btn btn-primary btn-block">Register</button>
+              <button type="submit" class="btn btn-primary btn-block">Registrieren</button>
             </form>
           </div>
+        </div>
+        <div class="mt-3">
+          <a class="btn btn-secondary btn-block" href="login.html">Zurück zu Anmelden</a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Bootstrap JS and dependencies (optional) -->
+  <!-- Bootstrap JS und Abhängigkeiten (optional) -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
