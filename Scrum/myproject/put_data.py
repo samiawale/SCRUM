@@ -4,7 +4,7 @@ import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
 django.setup()
 
-from models import Tree
+from myapp.models import Tree
 
 Tree.objects.create(
     gattung = 'Baum',
