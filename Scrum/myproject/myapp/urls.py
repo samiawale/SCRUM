@@ -28,14 +28,11 @@ urlpatterns = [
     path('Auftrag/', views.auftrag, name='Auftrag'),
     path('Verwaltung/', views.auftrag, name='Verwaltung'),
     path('login-post', views.login_action, name='login_post'),
-   
-    
-    
-
     path('tree-mark', views.tree_mark, name='tree_mark'),
     path('register-post', views.register_action, name='register_post'),
     path('trees/',views.tree_list),
     path('trees/<int:id>',views.tree_detail),
+    path('get_trees/', views.get_trees, name='get_trees'),
     
 
 ]
