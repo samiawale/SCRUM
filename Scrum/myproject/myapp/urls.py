@@ -24,7 +24,9 @@ urlpatterns = [
     path('test_token/', views.test_token, name='test_token'),
     path('register/', views.register_view, name='register_view'),
     path('login/', views.login_view, name='login_view'),
-    path('Auftrag/', views.auftrag_view, name='auftrag'),
+    path('Auftrag/', views.auftrag, name='Auftrag'),
+    path('Verwaltung/', views.auftrag, name='Verwaltung'),
+    path('login-post', views.login_action, name='login_post'),
    
     
     
@@ -33,6 +35,6 @@ urlpatterns = [
     path('register-post', views.register_action, name='register_post'),
     path('trees/',views.tree_list),
     path('trees/<int:id>',views.tree_detail),
-    path('login-post', views.login_action, name='login_post'),
+    
 
 ]

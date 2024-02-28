@@ -6,8 +6,8 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mitarbeiter Aufträge</title>
-    {%load static%}
+    <title>Verwaltung</title>
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -15,11 +15,11 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href={% static 'css/Styles.css' %}>
-
+    <link rel="stylesheet" href="styles.css">
+    
     <!-- MarkerCluster -->
-    <link rel="stylesheet" href="{%static 'js/dist/MarkerCluster.css'%}">
-    <link rel="stylesheet" href="{% static 'js/dist/MarkerCluster.Default.css'%}">
+    <link rel="stylesheet" href="./dist/MarkerCluster.css">
+    <link rel="stylesheet" href="./dist/MarkerCluster.Default.css">
 </head>
 <body>
 
@@ -27,75 +27,52 @@
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
         <a href="index.html"> <!-- Adjust the href to your home page's URL -->
-        <img id="logo" src="{% static 'img/logo.png/' %}" alt="Logo">
-    </a>
-        <a class="navbar-brand" href="#">Stadtgarten und Friedhöfe</a>
+            <img id="logo" src="logo.png" alt="Logo">
+        </a>     
+                <a class="navbar-brand" href="#">Stadtgarten und Friedhöfe</a>
+        <li class="nav-item">
+              </li>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Abmelden</a>
-                </li>
+                    <a class="nav-link" href="index.html">Abmelden</a>  
             </ul>
         </div>
     </div>
 </nav>
 
+
+<script src="script.js"></script>
+
 <!-- Main Content -->
 <div class="container">
     <header>
-        <h1 class="nav-header">Mitarbeiter</h1>
+        <h1 class="nav-header">Verwaltung</h1>
     </header>
     <!-- Leaflet Map -->
     <div id="map" style="height: 600px; margin-top: 20px;"></div>
 </div>
 
-<div id="taskList">
-    <h2>Zu gießen</h2>
-    <ul id="tasks"></ul>
-</div>
-
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="{%static 'js/dist/leaflet.markercluster.js'%}"></script>
-<script src="{%static 'js/map.js' %}"> </script>
-<script>
-     // Fetch tasks from the database (replace this with your actual database connection)
-    // For demonstration purposes, using a dummy data array
-    var tasksData = [
-        { id: 1, description: 'Task 1' },
-        { id: 2, description: 'Task 2' },
-        { id: 3, description: 'Task 3' }
-    ];
+<script src="./dist/leaflet.markercluster.js"></script>
+<script src="./map.js"> </script>
+</body>
+</html>
 
-    function populateTaskList() {
-        var tasksList = document.getElementById('tasks');
-        tasksData.forEach(function(task) {
-            var listItem = document.createElement('li');
+<div class="table-container">
+    <h2>Mitarbeiter Tabelle</h2>
+    <table id="mitarbeiterTable">
+        <!-- Mitarbeiter table content will be generated using JavaScript -->
+    </table>
+</div>
 
-            // Create checkbox
-            var checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.id = 'task' + task.id;  // Unique ID for each checkbox
-            checkbox.addEventListener('change', function() {
-                // Disable the checkbox once it is checked
-                checkbox.disabled = true;
-                // You can also add additional logic here if needed
-            });
-            listItem.appendChild(checkbox);
-
-            // Create label for checkbox
-            var label = document.createElement('label');
-            label.htmlFor = 'task' + task.id;
-            label.textContent = task.description;
-            listItem.appendChild(label);
-
-            tasksList.appendChild(listItem);
-        });
-    }
-
-    // Call the function to populate the task list
-    populateTaskList();
-</script>
+<div class="table-container">
+    <h2>Baum Tabelle</h2>
+    <table id="baumTable">
+        <!-- Baum table content will be generated using JavaScript -->
+    </table>
+</div>
+</div>
 <footer>
     <div class="container-footer">
         <div class="row">
@@ -122,6 +99,3 @@
         </div>
     </div>
 </footer>
-</body>
-</html>
-

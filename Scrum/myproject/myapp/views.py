@@ -164,11 +164,14 @@ def generate_jwt_token(user):
 
     # Generate the JWT token
     token = jwt.encode(payload, '0zoAMXlVewTJLjbzCbXGym5Ag1jYH8ZJ', algorithm='HS256')
-
     return token
        
-def auftrag_view(request):
-    # If you want to redirect to 'login.html', you can do so here
-   return render (request,'auftrag_view')
+def auftrag(request):
+    return render(request, 'auftrag.html')
+
+       
+def Verwaltung(request):
+    return render(request, 'verwaltung.html')
+
 
 
