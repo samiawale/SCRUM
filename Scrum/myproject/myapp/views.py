@@ -173,11 +173,11 @@ def auftrag(request):
 def Verwaltung(request):
     return render(request, 'verwaltung.html')
 
-
-
 def get_trees(request):
     trees = Tree.objects.all()
     tree_data = [{'name': tree.name, 'lat': tree.lat, 'long': tree.long, 'is_water': tree.is_water} for tree in trees]
     return JsonResponse(tree_data, safe=False)
+
+
 
 
