@@ -20,13 +20,13 @@ from .import views
 
 urlpatterns = [
     path('', views.home),
-    path('admin/', admin.site.urls),   
+    #path('admin/', admin.site.urls),   
     path('home/',views.home,name='home_view'),
     path('test_token/', views.test_token, name='test_token'),
     path('register/', views.register_view, name='register_view'),
     path('login/', views.login_view, name='login_view'),
     path('Auftrag/', views.auftrag, name='Auftrag'),
-    path('Verwaltung/', views.auftrag, name='Verwaltung'),
+    path('Verwaltung/', views.Verwaltung, name='Verwaltung'),
     path('login-post', views.login_action, name='login_post'),
     path('tree-mark', views.tree_mark, name='tree_mark'),
     path('register-post', views.register_action, name='register_post'),

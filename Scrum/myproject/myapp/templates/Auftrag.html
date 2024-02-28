@@ -15,11 +15,13 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href={% static 'css/Styles.css' %}>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
     <!-- MarkerCluster -->
-    <link rel="stylesheet" href="{%static 'js/dist/MarkerCluster.css'%}">
-    <link rel="stylesheet" href="{% static 'js/dist/MarkerCluster.Default.css'%}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="{%static 'css/MarkerCluster.css'%}">
+    <link rel="stylesheet" href="{% static 'css/MarkerCluster.Default.css'%}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
 
@@ -114,9 +116,9 @@
                     
                 </p>
                 <p>
-                    <a href="#" class="footer-icon"><img src="facebook_logo.png" alt="Facebook"></a>
-                    <a href="#" class="footer-icon"><img src="instagram_logo.png" alt="Instagram"></a>
-                    <a href="#" class="footer-icon"><img src="x_logo.png" alt="X"></a>
+                    <a href="#" class="footer-icon"><img src="{% static 'img/facebook_logo.png' %}" alt="Facebook"></a>
+                    <a href="#" class="footer-icon"><img src="{% static 'img/instagram_logo.png' %}" alt="Instagram"></a>
+                    <a href="#" class="footer-icon"><img src="{% static 'img/x_logo.png' %}" alt="X"></a>
                 </p>
             </div>
         </div>
