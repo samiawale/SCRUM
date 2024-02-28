@@ -22,7 +22,6 @@
     <link rel="stylesheet" href="./dist/MarkerCluster.Default.css">
 </head>
 <body>
-
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
@@ -41,36 +40,129 @@
 </nav>
 
 
-<script src="script.js"></script>
+
 
 <!-- Main Content -->
 <div class="container">
     <header>
         <h1 class="nav-header">Verwaltung</h1>
     </header>
-    <!-- Leaflet Map -->
-    <div id="map" style="height: 600px; margin-top: 20px;"></div>
+
+    <div class="container mt-5">
+        <h2>Filtern und Hervorheben von Bäumen</h2>
+        <form id="filterForm">
+            <label for="treeName">Baumname:</label>
+            <input type="text" id="treeName" name="treeName">
+
+            <label for="treeAge">Baumalter:</label>
+            <input type="number" id="treeAge" name="treeAge" min="0">
+
+            <label for="treeType">Baumtyp:</label>
+            <select id="treeType" name="treeType">
+                <option value="oak">Eiche</option>
+                <option value="maple">Ahorn</option>
+                <!-- Add more options for other tree types... -->
+            </select>
+
+            <button type="button" class="btn btn-primary" onclick="filterTrees()">Filtern</button>
+        </form>
+
+        <div id="map" style="height: 600px; margin-top: 20px;"></div>
+
+        <h2>Ausgewählte Bäume</h2>
+        <ul id="selectedTrees"></ul>
+
+        <button type="button" class="btn btn-success" onclick="createAssignment()">Auftrag erstellen</button>
+    </div>
+
+
 </div>
 
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="./dist/leaflet.markercluster.js"></script>
 <script src="./map.js"> </script>
-</body>
-</html>
 
-<div class="table-container">
-    <h2>Mitarbeiter Tabelle</h2>
-    <table id="mitarbeiterTable">
-        <!-- Mitarbeiter table content will be generated using JavaScript -->
+<!-- here -->
+
+<div class="container mt-5">
+    <h2>Mitarbeiter</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Mitarbeiter 1</td>
+                <td>
+                    <button class="btn btn-primary assignBtn" data-bs-toggle="modal" data-bs-target="#assignmentModal" data-id="1">Zuweisen</button>
+                </td>
+            </tr>
+            <!-- Add more rows for other workers... -->
+        </tbody>
+    </table>
+
+    <h2>Bäume</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Assigned Worker</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Baum 1</td>
+                <td></td>
+                <td>
+                    <button class="btn btn-primary assignBtn" data-bs-toggle="modal" data-bs-target="#assignmentModal" data-id="1">Zuweisen</button>
+                </td>
+            </tr>
+            <!-- Add more rows for other trees... -->
+        </tbody>
     </table>
 </div>
 
-<div class="table-container">
-    <h2>Baum Tabelle</h2>
-    <table id="baumTable">
-        <!-- Baum table content will be generated using JavaScript -->
-    </table>
+<!-- Assignment Modal -->
+<div id="assignmentModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Auftrag zuweisen</h2>
+        <form id="assignmentForm">
+            <input type="hidden" id="itemId" name="itemId">
+            <label for="workerSelect">Mitarbeiter auswählen:</label>
+            <select id="workerSelect" name="worker">
+                <!-- Options for workers will be dynamically generated -->
+                <option value="1">Mitarbeiter 1</option>
+                <!-- Add more options for other workers... -->
+            </select>
+
+            <label for="actionSelect">Aktion auswählen:</label>
+            <select id="actionSelect" name="action">
+                <option value="water">Gießen</option>
+                <option value="cut">Schneiden</option>
+                <option value="both">Voll Pflege</option>
+            </select>
+
+            <button type="submit" class="btn btn-primary">Auftrag zuweisen</button>
+        </form>
+    </div>
+</div>
+
+<!-- Bootstrap JS (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+</div>
 </div>
 </div>
 <footer>
@@ -98,4 +190,9 @@
             </div>
         </div>
     </div>
+    <script src="script.js"></script>
 </footer>
+
+</body>
+</html>
+
