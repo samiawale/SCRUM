@@ -30,49 +30,67 @@
             <img id="logo" src="logo.png" alt="Logo">
         </a>     
                 <a class="navbar-brand" href="#">Stadtgarten und Friedhöfe</a>
-        <li class="nav-item">
-              </li>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                    <a class="nav-link" href="index.html">Abmelden</a>  
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Abmelden</a>
+                </li>
             </ul>
         </div>
     </div>
 </nav>
 
 
-<script src="script.js"></script>
 
 <!-- Main Content -->
 <div class="container">
     <header>
         <h1 class="nav-header">Verwaltung</h1>
     </header>
+    
+    <div class="container mt-5">
+    <h2>Filtern und Hervorheben von Bäumen</h2>
+    <form id="filterForm">
+        <label for="treeName">Baumname:</label>
+        <input type="text" id="treeName" name="treeName">
+
+        <label for="treeAge">Baumalter:</label>
+        <input type="number" id="treeAge" name="treeAge" min="0">
+
+        <label for="treeType">Baumtyp:</label>
+        <select id="treeType" name="treeType">
+            <option value="oak">Eiche</option>
+            <option value="maple">Ahorn</option>
+            <!-- Add more options for other tree types... -->
+        </select>
+
+        <button type="button" class="btn btn-primary" onclick="filterTrees()">Filtern</button>
+    </form>
+
+
+    <h2>Ausgewählte Bäume</h2>
+    <ul id="selectedTrees"></ul>
+
+</div>
     <!-- Leaflet Map -->
     <div id="map" style="height: 600px; margin-top: 20px;"></div>
 </div>
+<button type="button" class="btn btn-success" id="createAssignmentBtn">Auftrag erstellen</button>
+
 
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="./dist/leaflet.markercluster.js"></script>
 <script src="./map.js"> </script>
-</body>
-</html>
+<script src="./script.js"></script>
 
-<div class="table-container">
-    <h2>Mitarbeiter Tabelle</h2>
-    <table id="mitarbeiterTable">
-        <!-- Mitarbeiter table content will be generated using JavaScript -->
-    </table>
-</div>
 
-<div class="table-container">
-    <h2>Baum Tabelle</h2>
-    <table id="baumTable">
-        <!-- Baum table content will be generated using JavaScript -->
-    </table>
-</div>
-</div>
+<!-- ... (existing HTML code) ... -->
+
+
+<!-- ... (existing HTML code) ... -->
+
+
 <footer>
     <div class="container-footer">
         <div class="row">
@@ -99,3 +117,5 @@
         </div>
     </div>
 </footer>
+</body>
+</html>
