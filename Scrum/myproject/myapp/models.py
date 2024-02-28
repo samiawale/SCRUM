@@ -14,7 +14,7 @@ class Tree(models.Model):
     )
     id = models.AutoField(primary_key=True)
     gattung  = models.CharField(max_length=50)
-    pflanzjahr = models.IntegerField()
+    pflanzjahr = models.IntegerField(null = True, blank = True)
     gebiet = models.CharField(max_length = 50)
     strasse = models.CharField(max_length=50)
     lat = models.FloatField()
