@@ -21,7 +21,7 @@ from .import views
 urlpatterns = [
     path('', views.home),
     path('admin/', admin.site.urls),   
-    path('home/',views.home),
+    path('home/',views.home,name='home_view'),
     path('test_token/', views.test_token, name='test_token'),
     path('register/', views.register_view, name='register_view'),
     path('login/', views.login_view, name='login_view'),
@@ -33,6 +33,9 @@ urlpatterns = [
     path('trees/',views.tree_list),
     path('trees/<int:id>',views.tree_detail),
     path('get_trees/', views.get_trees, name='get_trees'),
+ 
+    
+    
     
 
 ]
