@@ -7,7 +7,8 @@ if os.path.exists(file_name):
     gdf = gpd.read_file(file_name)
 
     print("File loaded successfully.")
-    print(gdf.loc[0,'geometry'])
+    print(gdf[['Gattung','gebiet','pflanzjahr','strasse','geometry']])
+    
 else:
     print("File does not exist in the current directory.")
 
