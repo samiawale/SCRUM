@@ -1,9 +1,10 @@
-from models import Tree
 import os
 import django
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')  # 'myproject' mit dem Namen Ihres Django-Projekts ersetzen
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
 django.setup()
+
+from models import Tree
 
 Tree.objects.create(
     gattung = 'Baum',
