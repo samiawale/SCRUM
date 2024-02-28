@@ -181,3 +181,6 @@ def get_trees(request):
     return JsonResponse(tree_data, safe=False)
 
 
+def logout_view(request):
+    logout(request)
+    return redirect('home')
