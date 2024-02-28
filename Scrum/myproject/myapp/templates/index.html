@@ -19,7 +19,7 @@
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="{% static 'css/MarkerCluster.css' %}">
-    <link rel="stylesheet" href="{% static 'css/'MarkerCluster.Default.css %}">
+    <link rel="stylesheet" href="{% static 'css/MarkerCluster.Default.css' %}">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
     <!-- Custom CSS -->
@@ -31,7 +31,7 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-        <img id="logo" src="logo.png" alt="Logo"> <!-- Replace "logo.png" with your actual logo image -->
+        <img id="logo" src="{% static 'img/logo.png'%}" alt="Logo"> <!-- Replace "logo.png" with your actual logo image -->
         <a class="navbar-brand" href="#">Stadtgarten und Friedhöfer</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -46,7 +46,7 @@
                 </li>
                 <li
                         class="nav-item">
-                    <a class="nav-link" href="login.html">Anmelden</a>
+                    <a class="nav-link" href="{%url 'login_view'%}">Anmelden</a>
                 </li>
             </ul>
         </div>
@@ -85,7 +85,7 @@
 
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="./dist/leaflet.markercluster.js"></script>
+<script src="{%static 'js/dist/leaflet.markercluster.js'%}"></script>
 <script src="{% static 'js/map.js' %}"> </script>
 <!-- Footer -->
 <footer>
@@ -106,9 +106,9 @@
                     
                 </p>
                 <p>
-                    <a href="#" class="footer-icon"><img src="facebook_logo.png" alt="Facebook"></a>
-                    <a href="#" class="footer-icon"><img src="instagram_logo.png" alt="Instagram"></a>
-                    <a href="#" class="footer-icon"><img src="x_logo.png" alt="X"></a>
+                    <a href="#" class="footer-icon"><img src="{% static 'img/facebook_logo.png'%}" alt="Facebook"></a>
+                    <a href="#" class="footer-icon"><img src="{% static 'img/instagram_logo.png'%}" alt="Instagram"></a>
+                    <a href="#" class="footer-icon"><img src="{% static 'img/x_logo.png'%}" alt="X"></a>
                 </p>
             </div>
         </div>

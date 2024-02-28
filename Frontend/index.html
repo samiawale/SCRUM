@@ -43,6 +43,22 @@
         .water-btn:hover {
             background-color: #45a049; /* Hintergrundfarbe beim Überfahren */
             color: white; /* Textfarbe beim Überfahren */
+
+        .marker-popup {
+            width: 50px; /* Breite des Containers */
+            height: 50px; /* Höhe des Containers */
+            border-radius: 50%; /* Rundungsradius für Kreis */
+            overflow: hidden; /* Verhindert, dass Bild über den Kreis hinausragt */
+        }
+
+        .marker-popup img {
+            width: 100%; /* Bildbreite auf 100% des Containers einstellen */
+            height: 100%; /* Bildhöhe auf 100% des Containers einstellen */
+            object-fit: cover; /* Skalierung des Bildes, um es in den Container zu füllen */
+        }
+        progress {
+            width: 100%;
+            height: 20px;
         }
     </style>
 </head>
