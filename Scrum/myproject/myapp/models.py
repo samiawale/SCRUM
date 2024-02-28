@@ -8,19 +8,21 @@ class MyTree(models.Model):
 
 
 class Tree(models.Model):
-    list_display = ('id', 'name', 'lat', 'long','is_water') 
     IS_WATER_CHOICES = (
         (0, 'No'),  # 0 represents False
         (1, 'Yes'),  # 1 represents True
     )
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50)
+    gattung  = models.CharField(max_length=50)
+    pflanzjahr = models.IntegerField()
+    gebiet = models.CharField(max_length = 50)
+    strasse = models.CharField(max_length=50)
     lat = models.FloatField()
     long = models.FloatField()
     is_water = models.IntegerField(choices=IS_WATER_CHOICES, default=0)
     
     def __str__(self):
-        return self.name
+        return self.gattung
     
 
 class User(models.Model):
