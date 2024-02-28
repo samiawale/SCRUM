@@ -14,7 +14,8 @@ class Tree(models.Model):
         (1, 'Yes'),  # 1 represents True
     )
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50)
+    gattung  = models.CharField(max_length=50)
+    pflanzjahr = models.IntegerField(max_length = 5)
     lat = models.FloatField()
     long = models.FloatField()
     is_water = models.IntegerField(choices=IS_WATER_CHOICES, default=0)
