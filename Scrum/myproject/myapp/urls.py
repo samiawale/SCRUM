@@ -36,6 +36,7 @@ urlpatterns = [
     path('register-post', views.register_action, name='register_post'),
     path('trees/',views.tree_list),
     path('trees/<int:id>',views.tree_detail),
+    path('get_trees/', views.get_trees, name='get_trees'),
     
 
 ]
