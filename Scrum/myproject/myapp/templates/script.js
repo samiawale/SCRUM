@@ -1,5 +1,5 @@
 // List of Mitarbeiter
-var employees = ['John Doe', 'Joema Ma', 'Max Mustermann', 'Anna Musterfrau', 'Chris Smith'];
+var employees = ['John Doe', 'Joema Ma', 'Max Mustermann', 'Anna Musterfrau', 'Chris Smith' , 'None'];
 
 // List of Trees
 var trees = [
