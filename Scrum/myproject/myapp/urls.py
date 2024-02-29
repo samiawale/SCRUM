@@ -32,12 +32,11 @@ urlpatterns = [
     path('register-post', views.register_action, name='register_post'),
     path('trees/',views.tree_list),
     path('trees/<int:id>',views.tree_detail),
-    path('get_trees/', views.get_trees, name='get_trees'),
+    #path('get_trees/', views.get_trees, name='get_trees'),
     path('get_mitarbeiter/', views.get_mitarbeiter, name='get_mitarbeiter'),
     path('get_auftrag/', views.get_auftrag, name='get_auftrag'),
-
   
-    path('geoplot', views.geoplot, name='geoplot'),
+    #path('geoplot', views.geoplot, name='geoplot'),
     path('get-geoplot', views.get_geoplot, name='get_geoplot'),
 
 

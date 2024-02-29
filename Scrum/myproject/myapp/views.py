@@ -28,21 +28,7 @@ from .models import Auftrag
 
 @api_view(['POST'])
 def login(request):
-    return Response({})
-    
-
-# @api_view(['POST'])
-# def signup(request):
-#     serializer=UserSerializer(data=request.data)
-#     if serializer.is_valid():
-#         serializer.save()
-#         user = User.objects.get(username=request.data['username'])
-#         user.set_password(request.data['password'])
-#         user.save()    
-#         token = Token.objects.create(user=user)
-#     return Response({"token": token.key, "user":serializer.data})
-#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+    return Response({})   
 
 @api_view(['POST'])
 def test_token(request):
@@ -108,7 +94,6 @@ def tree_mark(request):
    # Return a response with the serialized Tree object
    return Response({'message': 'Data inserted successfully', 'tree': serializer.data})
 
-
 @api_view(['POST'])
 def login_action(request):
     username = request.data.get('username')
@@ -128,9 +113,6 @@ def login_action(request):
         # Return user data and token
         return Response({'user': serializer.data, 'token': token}, status=status.HTTP_200_OK)
 
-        
-    
-   
 @api_view(['POST'])
 def register_action(request):
     # Serialize the request data
@@ -154,9 +136,7 @@ def register_action(request):
     # If data is not valid, return error response
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-
-
+# Function to generate JWT token
 def generate_jwt_token(user):
     # Set the expiration time for the token
     expiration_time = datetime.utcnow() + timedelta(days=1)  # Token valid for 1 day
@@ -179,34 +159,29 @@ def auftrag(request):
 def Verwaltung(request):
     return render(request, 'verwaltung.html')
 
-def get_trees(request):
-    trees = Tree.objects.all()
-    tree_data = [{'name': tree.name, 'lat': tree.lat, 'long': tree.long, 'is_water': tree.is_water} for tree in trees]
-    return JsonResponse(tree_data, safe=False)
+# def geoplot(request):
 
-def geoplot(request):
+#     file_name = 'geo_data.geojson'
 
-    file_name = 'geo_data.geojson'
+#     if os.path.exists(file_name):
+#         gdf = gpd.read_file(file_name)
 
-    if os.path.exists(file_name):
-        gdf = gpd.read_file(file_name)
+#         data = []
+#         data = gdf[['Gattung','pflanzjahr','gebiet','strasse']]
+#         data['Lat'] = gdf.geometry.y
+#         data['Long'] = gdf.geometry.x
 
-        data = []
-        data = gdf[['Gattung','pflanzjahr','gebiet','strasse']]
-        data['Lat'] = gdf.geometry.y
-        data['Long'] = gdf.geometry.x
+#         for index, row in data.iterrows(): 
+#             GeoData.objects.create(
+#                 Gattung = row['Gattung'],
+#                 pflanzjahr = row['pflanzjahr'],
+#                 gebiet = row['gebiet'],
+#                 strasse = row['strasse'],
+#                 lat = row['Lat'],
+#                 long = row['Long']
+#             )
 
-        for index, row in data.iterrows(): 
-            GeoData.objects.create(
-                Gattung = row['Gattung'],
-                pflanzjahr = row['pflanzjahr'],
-                gebiet = row['gebiet'],
-                strasse = row['strasse'],
-                lat = row['Lat'],
-                long = row['Long']
-            )
-
-    return JsonResponse({"status": True}, safe=False)
+#     return JsonResponse({"status": True}, safe=False)
 
 
 
@@ -218,14 +193,18 @@ def get_geoplot(request):
     response = [{'Gattung': value.Gattung, 'pflanzjahr': value.pflanzjahr, 'gebiet': value.gebiet, 'strasse': value.strasse, 'lat':value.lat,'long':value.long} for value in geo_data]
     return JsonResponse(response, safe=False)
     
+@api_view(['GET'])
 def get_mitarbeiter(request):
     mitarbeiter = Mitarbeiter.objects.all()
 
     response = [{'id':value.mid,'vorname': value.vorname, 'nachname': value.nachname} for value in mitarbeiter]
     return JsonResponse(response, safe=False)
-    
+
+@api_view(['GET'])    
 def get_auftrag(request):
     auftrag = Auftrag.objects.all()
 
     response = [{'aid':value.aid,'mid': value.mid, 'gid': value.gid, 'aktion': value.aktion} for value in auftrag]
     return JsonResponse(response, safe=False)
+
+
