@@ -220,6 +220,6 @@ def get_geoplot(request):
 def get_mitarbeiter(request):
     mitarbeiter = Mitarbeiter.objects.all()
 
-    response = [{'vorname': value.vorname, 'nachname': value.nachname} for value in mitarbeiter]
+    response = [{'id':value.mid,'vorname': value.vorname, 'nachname': value.nachname} for value in mitarbeiter]
     return JsonResponse(response, safe=False)
     
