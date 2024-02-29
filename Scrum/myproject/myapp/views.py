@@ -159,32 +159,6 @@ def auftrag(request):
 def Verwaltung(request):
     return render(request, 'verwaltung.html')
 
-# def geoplot(request):
-
-#     file_name = 'geo_data.geojson'
-
-#     if os.path.exists(file_name):
-#         gdf = gpd.read_file(file_name)
-
-#         data = []
-#         data = gdf[['Gattung','pflanzjahr','gebiet','strasse']]
-#         data['Lat'] = gdf.geometry.y
-#         data['Long'] = gdf.geometry.x
-
-#         for index, row in data.iterrows(): 
-#             GeoData.objects.create(
-#                 Gattung = row['Gattung'],
-#                 pflanzjahr = row['pflanzjahr'],
-#                 gebiet = row['gebiet'],
-#                 strasse = row['strasse'],
-#                 lat = row['Lat'],
-#                 long = row['Long']
-#             )
-
-#     return JsonResponse({"status": True}, safe=False)
-
-
-
 @api_view(['GET'])
 def get_geoplot(request):
     # Get all GeoData objects
@@ -192,7 +166,7 @@ def get_geoplot(request):
     
     response = [{'Gattung': value.Gattung, 'pflanzjahr': value.pflanzjahr, 'gebiet': value.gebiet, 'strasse': value.strasse, 'lat':value.lat,'long':value.long} for value in geo_data]
     return JsonResponse(response, safe=False)
-    
+
 @api_view(['GET'])
 def get_mitarbeiter(request):
     mitarbeiter = Mitarbeiter.objects.all()
@@ -207,4 +181,14 @@ def get_auftrag(request):
     response = [{'aid':value.aid,'mid': value.mid, 'gid': value.gid, 'aktion': value.aktion} for value in auftrag]
     return JsonResponse(response, safe=False)
 
+@api_view(['Get'])
+def get_mitarbeiter_auftrag(request, id):
+    auftrag = Auftrag.objects.filter(mid=id)
 
+    response = [{'aid':value.aid,'mid': value.mid, 'gid': value.gid, 'aktion': value.aktion} for value in auftrag]
+    return JsonResponse(response, safe=False)
+
+def get_geoplot_filtered(request, filter):
+    geo_data = GeoData.objects.filter(Gattung=filter)
+    response = [{'Gattung': value.Gattung, 'pflanzjahr': value.pflanzjahr, 'gebiet': value.gebiet, 'strasse': value.strasse, 'lat':value.lat,'long':value.long} for value in geo_data]
+    return JsonResponse(response, safe=False)
