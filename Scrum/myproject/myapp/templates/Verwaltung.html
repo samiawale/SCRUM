@@ -43,50 +43,15 @@
 </nav>
 
 
-
-<!-- Main Content -->
-<div class="container">
-    <header>
-        <h1 class="nav-header">Verwaltung</h1>
-    </header>
-    
-    <!-- <div class="container mt-5">
-    <h2>Filtern und Hervorheben von Bäumen</h2>
-    <form id="filterForm">
-        <label for="treeName">Baumname:</label>
-        <input type="text" id="treeName" name="treeName">
-
-        <label for="treeAge">Baumalter:</label>
-        <input type="number" id="treeAge" name="treeAge" min="0">
-
-        <label for="treeType">Baumtyp:</label>
-        <select id="treeType" name="treeType">
-            <option value="oak">Eiche</option>
-            <option value="maple">Ahorn</option>
-            // Add more options for other tree types... 
-        </select> -->
-
-        <div class="container mt-5">
-            <h2>Data Table</h2>
-            <table class="table">
-                <thead>
-                    <tr id="tableHeader"></tr>
-                </thead>
-                <tbody id="tableBody"></tbody>
-            </table>
-        </div>
-        <button type="button" class="btn btn-primary" onclick="filterTrees()">Filtern</button>
-    </form>
-
-
-    <h2>Ausgewählte Bäume</h2>
-    <ul id="selectedTrees"></ul>
-
 </div>
     <!-- Leaflet Map -->
     <div id="map" style="height: 600px; margin-top: 20px;"></div>
 </div>
-<button type="button" class="btn btn-success" id="createAssignmentBtn">Auftrag erstellen</button>
+
+
+
+
+
 
 
 <!-- Leaflet JS -->
@@ -96,45 +61,61 @@
 <script src="./script.js"></script>
 
 
-<!-- ... (existing HTML code) ... -->
-<div id="yourAssignmentTableContainer"></div>
 
-<script>
-    // Fetch data from the backend
-    fetch('http://127.0.0.1:8000/geoplot')
-        .then(response => response.json())
-        .then(data => {
-            // Check if data is an array and not empty
-            if (Array.isArray(data) && data.length > 0) {
-                // Get the properties of the first object to create table headers
-                const headers = Object.keys(data[0]);
+<div class="container mt-5">
+    <h2>Mitarbeiter und Bäume Verwaltung</h2>
 
-                // Create table headers
-                const headerRow = document.getElementById('tableHeader');
-                headers.forEach(header => {
-                    const th = document.createElement('th');
-                    th.textContent = header;
-                    headerRow.appendChild(th);
-                });
+    <form id="filterForm">
+        <label for="employeeName">Mitarbeiter:</label>
+        <select id="employeeName" name="employeeName">
+            <option value="all">Alle Mitarbeiter</option>
+            <option value="John">John Doe</option>
+            <option value="Joe">Joema Ma</option>
+            <option value="Max">Max Mustermann</option>
+            <option value="Anna">Anna Musterfrau</option>
+            <option value="Chris">Chris Smith</option>
+        </select>
 
-                // Create table rows with data
-                const tableBody = document.getElementById('tableBody');
-                data.forEach(item => {
-                    const tr = document.createElement('tr');
-                    headers.forEach(header => {
-                        const td = document.createElement('td');
-                        td.textContent = item[header];
-                        tr.appendChild(td);
-                    });
-                    tableBody.appendChild(tr);
-                });
-            } else {
-                console.error('Invalid data format:', data);
-            }
-        })
-        .catch(error => console.error('Error fetching data:', error));
-</script>
-<!-- ... (existing HTML code) ... -->
+        <label for="treeAction">Aktion:</label>
+        <select id="treeAction" name="treeAction">
+            <option value="all">Alle Aktionen</option>
+            <option value="gießen">Gießen</option>
+            <option value="schneiden">Schneiden</option>
+            <option value="vollpflege">Vollpflege</option>
+        </select>
+
+        <button type="button" class="btn btn-primary" onclick="filterTable()">Filtern</button>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tree ID</th>
+                <th>Gattung</th>
+                <th>Pflanzjahr</th>
+                <th>Gebiet</th>
+                <th>Strasse</th>
+                <th>lat</th>
+                <th>Long</th>
+                <th>is_water</th>
+                <th>Mitarbeiter</th>
+                <th>Action</th>
+                <th>Select</th>
+            </tr>
+        </thead>
+        <tbody id="treeTableBody">
+            <!-- JavaScript will populate this table body -->
+        </tbody>
+    </table>
+
+    <button type="button" class="btn btn-success" onclick="createAssignment()">Auftrag erstellen</button>
+    <p id="confirmationMsg" style="display: none; color: green;">Auftrag erstellt!</p>
+</div>
+
+
+
+
+
 
 
 <footer>
@@ -166,6 +147,14 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<!-- Bootstrap JS (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Your custom JavaScript code -->
+<script src="script.js"></script>
+
 
 </body>
 </html>
