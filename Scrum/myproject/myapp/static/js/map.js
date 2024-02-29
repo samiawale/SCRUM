@@ -40,10 +40,10 @@ function fetchTreeData() {
         })
         .then(data => {
             // Slice the first 100 trees
-            var trees = data.slice(0, 100);
+            var trees = data.slice(0, data.length);
             // Add trees as markers to the map
             trees.forEach(function(tree) {
-                var marker = L.marker([tree.lat, tree.long]).bindPopup(tree.name);
+                var marker = L.marker([tree.lat, tree.long]).bindPopup(tree.Gattung + '\n' + tree.gebiet);
                 markers.addLayer(marker);
             });
         })
