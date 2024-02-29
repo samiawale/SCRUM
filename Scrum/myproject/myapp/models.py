@@ -46,6 +46,11 @@ class GeoData(models.Model):
     strasse = models.CharField(max_length=255)
     lat = models.FloatField()
     long = models.FloatField()
+
+class Mitarbeiter(models.Model):
+    mid = models.AutoField(primary_key=True)
+    vorname = models.CharField(max_length = 50)
+    nachname = models.CharField(max_length = 50)
     
 
 
