@@ -33,9 +33,10 @@ urlpatterns = [
     path('trees/',views.tree_list),
     path('trees/<int:id>',views.tree_detail),
     path('get_trees/', views.get_trees, name='get_trees'),
- 
-    
-    
-    
+
+  
+    path('geoplot', views.geoplot, name='geoplot'),
+    path('get-geoplot', views.get_geoplot, name='get_geoplot'),
+
 
 ]

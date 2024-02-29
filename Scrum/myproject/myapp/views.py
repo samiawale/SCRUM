@@ -8,6 +8,7 @@ from datetime import datetime
 from .models import Tree
 from .serializers import TreeSerializer
 from .serializers import UserSerializer
+from .serializers import GeoData
 from django.contrib.auth.hashers import make_password  # Import make_password function
 from .models import User
 from rest_framework import status
@@ -17,8 +18,11 @@ from datetime import datetime, timedelta
 from django.contrib.auth import authenticate
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.hashers import check_password
+from loguru import logger
 
-
+import geopandas as gpd
+import os
+from .models import GeoData
 
 @api_view(['POST'])
 def login(request):
@@ -178,6 +182,39 @@ def get_trees(request):
     tree_data = [{'name': tree.name, 'lat': tree.lat, 'long': tree.long, 'is_water': tree.is_water} for tree in trees]
     return JsonResponse(tree_data, safe=False)
 
+def geoplot(request):
+
+    file_name = 'geo_data.geojson'
+
+    if os.path.exists(file_name):
+        gdf = gpd.read_file(file_name)
+
+        data = []
+        data = gdf[['Gattung','pflanzjahr','gebiet','strasse']]
+        data['Lat'] = gdf.geometry.y
+        data['Long'] = gdf.geometry.x
+
+        for index, row in data.iterrows(): 
+            GeoData.objects.create(
+                Gattung = row['Gattung'],
+                pflanzjahr = row['pflanzjahr'],
+                gebiet = row['gebiet'],
+                strasse = row['strasse'],
+                lat = row['Lat'],
+                long = row['Long']
+            )
+
+    return JsonResponse({"status": True}, safe=False)
 
 
 
+@api_view(['GET'])
+def get_geoplot(request):
+    # Get all GeoData objects
+    geo_data = GeoData.objects.all()
+    
+    response = [{'Gattung': value.Gattung, 'pflanzjahr': value.pflanzjahr, 'gebiet': value.gebiet, 'strasse': value.strasse, 'lat':value.lat,'long':value.long} for value in geo_data]
+    return JsonResponse(response, safe=False)
+    
+     
+    

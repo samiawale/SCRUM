@@ -1,10 +1,10 @@
 from django.db import models
 
-class MyTree(models.Model):
-    name = models.CharField(max_length=100)
-    tree_type = models.CharField(max_length=100)
-    x_coordinate = models.FloatField()
-    y_coordinate = models.FloatField()
+# class MyTree(models.Model):
+#     name = models.CharField(max_length=100)
+#     tree_type = models.CharField(max_length=100)
+#     x_coordinate = models.FloatField()
+#     y_coordinate = models.FloatField()
 
 
 class Tree(models.Model):
@@ -36,6 +36,18 @@ class User(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+     
+
+class GeoData(models.Model):
+    id = models.AutoField(primary_key=True)
+    Gattung = models.CharField(max_length=255)
+    pflanzjahr = models.CharField(max_length=255)
+    gebiet = models.CharField(max_length=255)
+    strasse = models.CharField(max_length=255)
+    lat = models.FloatField()
+    long = models.FloatField()
+    
+
 
 
 
