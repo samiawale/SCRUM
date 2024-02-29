@@ -51,6 +51,13 @@ class Mitarbeiter(models.Model):
     mid = models.AutoField(primary_key=True)
     vorname = models.CharField(max_length = 50)
     nachname = models.CharField(max_length = 50)
+
+class Auftrag(models.Model):
+    aid = models.AutoField(primary_key=True)
+    mid = models.ForeignKey(Mitarbeiter,on_delete=models.CASCADE)
+    gid = models.ForeignKey(GeoData,on_delete = models.CASCADE)
+    aktion = models.CharField(max_length = 50)
+
     
 
 
