@@ -35,6 +35,7 @@ urlpatterns = [
     #path('get_trees/', views.get_trees, name='get_trees'),
     path('get_mitarbeiter/', views.get_mitarbeiter, name='get_mitarbeiter'),
     path('get_auftrag/', views.get_auftrag, name='get_auftrag'),
+    path('get-mitarbeiter-auftrag/', views.get_mitarbeiter_auftrag, name='get_mitarbeiter_auftrag'),
   
     #path('geoplot', views.geoplot, name='geoplot'),
     path('get-geoplot/', views.get_geoplot, name='get_geoplot'),
