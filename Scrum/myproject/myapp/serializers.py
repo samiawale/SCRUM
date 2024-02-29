@@ -4,6 +4,7 @@ from .models import Tree
 from rest_framework import serializers
 from .models import User,GeoData
 from .models import Mitarbeiter
+from .models import Auftrag
 
 class TreeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,4 +30,9 @@ class Mitarbeiter(serializers.ModelSerializer):
     class Meta:
         model = Mitarbeiter
         fields = ['id', 'first_name', 'last_name']
+
+class Auftrag(serializers.ModelSerializer):
+    class Meta:
+        model = Auftrag
+        fields = ['aid', 'mid', 'gid', 'aktion']
 

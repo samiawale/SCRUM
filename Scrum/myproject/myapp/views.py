@@ -24,6 +24,7 @@ import geopandas as gpd
 import os
 from .models import GeoData
 from .models import Mitarbeiter
+from .models import Auftrag
 
 @api_view(['POST'])
 def login(request):
@@ -223,3 +224,8 @@ def get_mitarbeiter(request):
     response = [{'id':value.mid,'vorname': value.vorname, 'nachname': value.nachname} for value in mitarbeiter]
     return JsonResponse(response, safe=False)
     
+def get_auftrag(request):
+    auftrag = Auftrag.objects.all()
+
+    response = [{'aid':value.aid,'mid': value.mid, 'gid': value.gid, 'aktion': value.aktion} for value in auftrag]
+    return JsonResponse(response, safe=False)
