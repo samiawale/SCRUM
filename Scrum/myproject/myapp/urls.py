@@ -33,6 +33,7 @@ urlpatterns = [
     path('trees/',views.tree_list),
     path('trees/<int:id>',views.tree_detail),
     path('get_trees/', views.get_trees, name='get_trees'),
+    path('get_mitarbeiter/', views.get_mitarbeiter, name='get_mitarbeiter'),
 
   
     path('geoplot', views.geoplot, name='geoplot'),

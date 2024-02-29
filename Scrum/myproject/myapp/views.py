@@ -23,6 +23,7 @@ from loguru import logger
 import geopandas as gpd
 import os
 from .models import GeoData
+from .models import Mitarbeiter
 
 @api_view(['POST'])
 def login(request):
@@ -216,5 +217,9 @@ def get_geoplot(request):
     response = [{'Gattung': value.Gattung, 'pflanzjahr': value.pflanzjahr, 'gebiet': value.gebiet, 'strasse': value.strasse, 'lat':value.lat,'long':value.long} for value in geo_data]
     return JsonResponse(response, safe=False)
     
-     
+def get_mitarbeiter(request):
+    mitarbeiter = Mitarbeiter.objects.all()
+
+    response = [{'vorname': value.vorname, 'nachname': value.nachname} for value in mitarbeiter]
+    return JsonResponse(response, safe=False)
     

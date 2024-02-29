@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from .models import Tree 
 from rest_framework import serializers
 from .models import User,GeoData
+from .models import Mitarbeiter
 
 class TreeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -24,5 +25,8 @@ class GeoData(serializers.ModelSerializer):
         model = GeoData
         fields = ['id', 'Gattung', 'pflanzjahr', 'gebiet', 'strasse', 'lat','long']
         
-
+class Mitarbeiter(serializers.ModelSerializer):
+    class Meta:
+        model = Mitarbeiter
+        fields = ['id', 'first_name', 'last_name']
 
