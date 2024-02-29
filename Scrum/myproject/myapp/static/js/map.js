@@ -47,11 +47,6 @@ var trees = [
     { lat: 52.135533, lng: 11.623624, name: 'Baum 8' },
     { lat: 52.140533, lng: 11.627624, name: 'Baum 9' },
     { lat: 52.149053, lng: 11.620624, name: 'Baum 10' },
-    { lat: 52.149053, lng: 11.633624, name: 'Baum 11' },
-    { lat: 52.145533, lng: 11.627624, name: 'Baum 12' },
-    { lat: 52.135533, lng: 11.630624, name: 'Baum 13' },
-    { lat: 52.135533, lng: 11.623624, name: 'Baum 14' },
-    { lat: 52.140533, lng: 11.627624, name: 'Baum 15' }
     // Add more tree coordinates here
 ];
 
