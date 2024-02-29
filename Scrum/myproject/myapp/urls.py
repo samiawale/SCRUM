@@ -37,7 +37,7 @@ urlpatterns = [
     path('get_auftrag/', views.get_auftrag, name='get_auftrag'),
   
     #path('geoplot', views.geoplot, name='geoplot'),
-    path('get-geoplot', views.get_geoplot, name='get_geoplot'),
+    path('get-geoplot/', views.get_geoplot, name='get_geoplot'),
 
 
 ]

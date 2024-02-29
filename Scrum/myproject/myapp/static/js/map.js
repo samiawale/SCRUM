@@ -29,36 +29,39 @@ var drawControl = new L.Control.Draw({
 });
 map.addControl(drawControl);
 
+// Function to fetch tree data from the GeoPlot API
+function fetchTreeData() {
+    fetch('/get-geoplot/')  // Adjust the URL to match your endpoint
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch tree data');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Slice the first 100 trees
+            var trees = data.slice(0, 100);
+            // Add trees as markers to the map
+            trees.forEach(function(tree) {
+                var marker = L.marker([tree.lat, tree.long]).bindPopup(tree.name);
+                markers.addLayer(marker);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching tree data:', error.message);
+        });
+}
+
+// Call the fetchTreeData function to load tree data and display it on the map
+fetchTreeData();
+
 // Event listener for when an item is created
 map.on('draw:created', function(e) {
     var layer = e.layer;
     drawnItems.addLayer(layer);
 });
 
-// Sample tree data
-var trees = [
-    { lat: 52.135533, lng: 11.627624, name: 'Baum 1' },
-    { lat: 52.158533, lng: 11.627624, name: 'Baum 2' },
-    { lat: 52.1490533, lng: 11.627624, name: 'Baum 3' },
-    { lat: 52.149053, lng: 11.620624, name: 'Baum 4' },
-    { lat: 52.149053, lng: 11.633624, name: 'Baum 5' },
-    { lat: 52.145533, lng: 11.627624, name: 'Baum 6' },
-    { lat: 52.135533, lng: 11.630624, name: 'Baum 7' },
-    { lat: 52.135533, lng: 11.623624, name: 'Baum 8' },
-    { lat: 52.140533, lng: 11.627624, name: 'Baum 9' },
-    { lat: 52.149053, lng: 11.620624, name: 'Baum 10' },
-    // Add more tree coordinates here
-];
-
-// Add trees as markers to the map
-trees.forEach(function(tree) {
-    var marker = L.marker([tree.lat, tree.lng]).bindPopup(tree.name);
-    markers.addLayer(marker);
-});
-
-// Get user's current location and show it on the map
-map.locate({setView: true, maxZoom: 15});
-
+// Function to handle location found
 function onLocationFound(e) {
     var radius = e.accuracy / 2;
 
@@ -68,10 +71,11 @@ function onLocationFound(e) {
     L.circle(e.latlng, radius).addTo(map);
 }
 
+// Function to handle location error
 function onLocationError(e) {
     alert(e.message);
 }
 
+// Listen for location found and error events
 map.on('locationfound', onLocationFound);
 map.on('locationerror', onLocationError);
- 
