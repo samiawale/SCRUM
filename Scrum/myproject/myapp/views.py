@@ -28,6 +28,9 @@ from .models import GeoData
 from .models import Mitarbeiter
 from .models import Auftrag
 
+from matplotlib.path import Path
+import numpy as np
+
 @api_view(['POST'])
 def login(request):
     return Response({})   
@@ -205,3 +208,20 @@ def get_geoplot_filtered(request, filter):
     response = [{'Gattung': value.Gattung, 'pflanzjahr': value.pflanzjahr, 'gebiet': value.gebiet, 'strasse': value.strasse, 'lat': value.lat, 'long': value.long } for value in geo_data]
     return JsonResponse(response, safe=False)
 
+@api_view(['GET'])
+def get_polygon(request, poly_data):
+    polygon = json.loads(poly_data)
+    poly_path = Path(np.array(polygon))
+
+    geo_data = GeoData.objects.all()
+
+    entries_within_polygon = []
+
+    for entry in geo_data:
+        point = (entry.long, entry.lat)
+        if poly_path.contains_point(point):
+            entries_within_polygon.append(entry)
+
+    response = [{'Gattung': value.Gattung, 'pflanzjahr': value.pflanzjahr, 'gebiet': value.gebiet, 'strasse': value.strasse, 'lat': value.lat, 'long': value.long } for value in entries_within_polygon]
+    return JsonResponse(response, safe=False)
+    

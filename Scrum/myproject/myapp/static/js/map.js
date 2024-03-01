@@ -42,6 +42,7 @@ map.on(L.Draw.Event.CREATED, function(e)
    
 //adds item to the map 
     drawnItems.addLayer(layer);
+    // fetchGeoFilteredTreeData(polygon_coordinates);
 });
 
 
@@ -50,6 +51,35 @@ function fetchFilteredTreeData(filter) {
     markers.clearLayers();
     // Senden Sie die Filterkriterien als JSON-Objekt an die Backend-URL
     fetch(`/get-geoplot/${encodeURIComponent(JSON.stringify(filter))}/`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch filtered tree data');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Verarbeiten Sie die zurückgegebenen Daten wie zuvor
+            var trees = data;
+            clearTreeList();
+            trees.forEach(function(tree) {
+                var popupContent = `<strong>Gattung:</strong> ${tree.Gattung}<br>`;
+                popupContent += `<strong>Gebiet:</strong> ${tree.gebiet}<br>`;
+                popupContent += `<strong>Pflanzjahr:</strong> ${tree.pflanzjahr}<br>`;
+                popupContent += `<strong>Straße:</strong> ${tree.strasse}<br>`;
+                var marker = L.marker([tree.lat, tree.long]).bindPopup(popupContent);
+                markers.addLayer(marker);
+                addToTreeList(tree);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching filtered tree data:', error.message);
+        });
+}
+
+function fetchGeoFilteredTreeData(filter) {
+    markers.clearLayers();
+    // Senden Sie die Filterkriterien als JSON-Objekt an die Backend-URL
+    fetch(`/get-polygon/${encodeURIComponent(JSON.stringify(filter))}/`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Failed to fetch filtered tree data');
