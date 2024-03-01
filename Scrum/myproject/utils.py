@@ -8,7 +8,18 @@ from myapp.views import get_mitarbeiter
 from matplotlib.path import Path
 import numpy as np
 
-'''''
+
+
+
+def auftrag_erstellen(mitarbeiter, geo_data,aktion): 
+    auftrag = Auftrag(mid=mitarbeiter, gid=geo_data, aktion=aktion)
+    auftrag.save()
+
+
+def check_trees_in_polygon():
+    polygon_coords= [(11.643121719425835,52.14401439798024),(11.647477626866023,52.14414607898052),(11.64777803427569,52.14116999333504),(11.641641140049614,52.14144654064812)]
+
+    
 
 #get polygon data 
 poly_data = []
@@ -36,15 +47,9 @@ for entry in geo_data_entries:
 for entry in entries_within_polygon:
     print(f"ID: {entry.id}, Location: ({entry.lat}, {entry.long})")
 
-    '''''
+    
 mit = Mitarbeiter.objects.all()[2]
 baum = GeoData.objects.all()[5]
-
-
-
-auftrag = Auftrag(mid=mit, gid=baum, aktion='Pflanzung')
-auftrag.save()
-
 
 
 
