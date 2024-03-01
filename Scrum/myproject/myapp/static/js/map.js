@@ -41,7 +41,7 @@ function fetchFilteredTreeData(filter) {
         })
         .then(data => {
             // Verarbeiten Sie die zurückgegebenen Daten wie zuvor
-            var trees = data.slice(0, 90000);
+            var trees = data
             trees.forEach(function(tree) {
                 var popupContent = `<strong>Gattung:</strong> ${tree.Gattung}<br>`;
                 popupContent += `<strong>Gebiet:</strong> ${tree.gebiet}<br>`;
@@ -56,7 +56,7 @@ function fetchFilteredTreeData(filter) {
 }
 
 // Beispiel für die Verwendung: Filter nach Spitz-Ahorn Bäumen aus dem Jahr 1950
-var filter = { "Gattung": "Tilia cordata, Winterlinde" };
+var filter = { "Gattung": "Tilia"};
 fetchFilteredTreeData(filter);
 
 // Event listener for when an item is created

@@ -190,18 +190,19 @@ def get_mitarbeiter_auftrag(request, id):
     response = [{'aid':value.aid,'mid': value.mid, 'gid': value.gid, 'aktion': value.aktion} for value in auftrag]
     return JsonResponse(response, safe=False)
 
+@api_view(['GET'])
 def get_geoplot_filtered(request, filter):
     filter_str = filter
-    print("Filter String:", filter_str)  # Debugging-Ausgabe hinzufügen
     if filter_str:
         filter_dict = json.loads(filter_str)
-        print("Filter Dictionary:", filter_dict)  # Debugging-Ausgabe hinzufügen
         query = Q()
         for key, value in filter_dict.items():
-            query &= Q(**{key: value})
+            # Use __icontains for case-insensitive partial string match
+            query &= Q(**{f"{key}__icontains": value})
         geo_data = GeoData.objects.filter(query)
     else:
         geo_data = GeoData.objects.all()
 
-    response = [{'Gattung': value.Gattung, 'pflanzjahr': value.pflanzjahr, 'gebiet': value.gebiet, 'strasse': value.strasse, 'lat':value.lat,'long':value.long} for value in geo_data]
+    response = [{'Gattung': value.Gattung, 'pflanzjahr': value.pflanzjahr, 'gebiet': value.gebiet, 'strasse': value.strasse, 'lat': value.lat, 'long': value.long} for value in geo_data]
     return JsonResponse(response, safe=False)
+
