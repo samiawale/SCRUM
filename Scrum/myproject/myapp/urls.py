@@ -40,7 +40,7 @@ urlpatterns = [
     #path('geoplot', views.geoplot, name='geoplot'),
     path('get-geoplot/', views.get_geoplot, name='get_geoplot'),
     path('get-geoplot/<str:filter>/', views.get_geoplot_filtered, name='get_geoplot_filtered'),
-    path('get-polygon', views.get_polygon, name='get_polygon'),
+    path('get-polygon/<str:poly_data>/', views.get_polygon, name='get-polygon'),
 
 
 ]

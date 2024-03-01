@@ -36,12 +36,22 @@ map.on(L.Draw.Event.CREATED, function(e) {
     var layer = e.layer;
     var type = e.type;
     console.log('Es wurde ein Object hinzugefügt')
-    var polygon_coordinates = layer.getLatLngs();
+    var polygon_coordinates = layer.getLatLngs()[0].map(function(point) {
+        return [point.lat, point.lng];
+    });
     console.log(polygon_coordinates);
+
+    // Add other filter criteria as needed
+    var filter = {
+        polygon: polygon_coordinates,
+        // Add other filter criteria here
+    };
+
+    // Call the fetchGeoFilteredTreeData function with the filter
+    fetchGeoFilteredTreeData(filter);
    
 //adds item to the map 
     drawnItems.addLayer(layer);
-
 });
 
 
