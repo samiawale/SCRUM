@@ -65,7 +65,6 @@ function fetchFilteredTreeData(filter) {
                 popupContent += `<strong>Gebiet:</strong> ${tree.gebiet}<br>`;
                 popupContent += `<strong>Pflanzjahr:</strong> ${tree.pflanzjahr}<br>`;
                 popupContent += `<strong>Straße:</strong> ${tree.strasse}<br>`;
-                popupContent += `<button onclick="addToTreeList(${JSON.stringify(tree)})">Add</button>`;
                 var marker = L.marker([tree.lat, tree.long]).bindPopup(popupContent);
                 markers.addLayer(marker);
                 addToTreeList(tree);
@@ -76,23 +75,35 @@ function fetchFilteredTreeData(filter) {
         });
 }
 
-// Funktion, um die Liste der Bäume anzuzeigen
+// Funktion zum Umschalten der Baumliste
 function toggleTreeList() {
     var treeList = document.getElementById('treeList');
     var toggleListButton = document.getElementById('toggleListButton');
 
     if (treeList.style.display === 'block') {
-        // Wenn die Liste angezeigt wird, verbergen und Text des Buttons ändern
+        // Wenn die Liste angezeigt wird, verbergen
         treeList.style.display = 'none';
-        toggleListButton.textContent = 'Liste anzeigen';
+        // Text des Buttons ändern, wenn die Liste geschlossen ist
+        toggleListButton.textContent = 'Bäume anzeigen';
     } else {
-        // Wenn die Liste verborgen ist, anzeigen und Text des Buttons ändern
+        // Wenn die Liste verborgen ist, anzeigen
         treeList.style.display = 'block';
-        toggleListButton.textContent = 'Liste schließen';
         // Bäume nur anzeigen, wenn die Liste geöffnet wird
         showTreeList();
+        // Text des Buttons ändern, wenn die Liste geöffnet ist
+        updateToggleListButtonText();
     }
 }
+
+// Funktion zum Aktualisieren des Textes des Toggle-List-Buttons
+function updateToggleListButtonText() {
+    var treeList = document.getElementById('treeList');
+    var toggleListButton = document.getElementById('toggleListButton');
+    var treeCount = treeList.getElementsByTagName('li').length; // Anzahl der Bäume in der Liste
+    toggleListButton.textContent = treeCount + ' Bäume anzeigen';
+}
+
+
 
     // Ansonsten die Liste anzeigen und Bäume laden
     treeList.style.display = 'block';
