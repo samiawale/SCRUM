@@ -154,10 +154,6 @@ function filterTrees() {
 
     fetchFilteredTreeData(filter);
 }
-var filter = { "Gattung": "Tilia cordata, Winterlinde"};
-fetchFilteredTreeData(filter);
-
-
 
 // Function to handle location found
 function onLocationFound(e) {
