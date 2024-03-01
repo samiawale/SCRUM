@@ -59,6 +59,24 @@ function fetchFilteredTreeData(filter) {
 var filter = { "Gattung": "Tilia"};
 fetchFilteredTreeData(filter);
 
+function filterTrees() {
+    var treeName = document.getElementById('Gattung').value;
+    var treeAge = document.getElementById('pflanzjahr').value;
+
+    var filter = {};
+
+    // Prüfen, ob ein Baumname eingegeben wurde
+    if (treeName.trim() !== "") {
+        filter["Gattung"] = treeName;
+    }
+
+    // Prüfen, ob ein Baumalter eingegeben wurde
+    if (treeAge.trim() !== "") {
+        filter["pflanzjahr"] = treeAge;
+    }
+    fetchFilteredTreeData(filter);
+}
+
 // Event listener for when an item is created
 map.on('draw:created', function(e) {
     var layer = e.layer;
