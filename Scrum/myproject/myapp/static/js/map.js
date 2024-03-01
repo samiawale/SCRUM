@@ -47,6 +47,7 @@ function fetchFilteredTreeData(filter) {
                 var popupContent = `<strong>Gattung:</strong> ${tree.Gattung}<br>`;
                 popupContent += `<strong>Gebiet:</strong> ${tree.gebiet}<br>`;
                 popupContent += `<strong>Pflanzjahr:</strong> ${tree.pflanzjahr}<br>`;
+                popupContent += `<strong>Straße:</strong> ${tree.strasse}<br>`;
                 var marker = L.marker([tree.lat, tree.long]).bindPopup(popupContent);
                 markers.addLayer(marker);
             });
@@ -59,20 +60,29 @@ function fetchFilteredTreeData(filter) {
 // Beispiel für die Verwendung: Filter nach Spitz-Ahorn Bäumen aus dem Jahr 1950
 
 function filterTrees() {
-    var treeName = document.getElementById('Gattung').value;
-    var treeAge = document.getElementById('pflanzjahr').value;
+    var gattung = document.getElementById('Gattung').value;
+    var pflanzjahr = document.getElementById('pflanzjahr').value;
+    var gebiet = document.getElementById('gebiet').value;
+    var strasse = document.getElementById('strasse').value;
 
     var filter = {};
 
-    // Prüfen, ob ein Baumname eingegeben wurde
-    if (treeName.trim() !== "") {
-        filter["Gattung"] = treeName;
+    if (gattung.trim() !== "") {
+        filter["Gattung"] = gattung;
     }
 
-    // Prüfen, ob ein Baumalter eingegeben wurde
-    if (treeAge.trim() !== "") {
-        filter["pflanzjahr"] = treeAge;
+    if (pflanzjahr.trim() !== "") {
+        filter["pflanzjahr"] = pflanzjahr;
     }
+
+    if (gebiet.trim() !== "") {
+        filter["gebiet"] = gebiet;
+    }
+
+    if (strasse.trim() !== "") {
+        filter["strasse"] = strasse;
+    }
+
     fetchFilteredTreeData(filter);
 }
 
