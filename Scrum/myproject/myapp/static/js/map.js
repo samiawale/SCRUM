@@ -213,3 +213,23 @@ function onLocationError(e) {
 // Listen for location found and error events
 map.on('locationfound', onLocationFound);
 map.on('locationerror', onLocationError);
+
+function showEmployeeList() {
+    // Anzeige der Liste aktivieren
+    var employeeList = document.getElementById('employeeList');
+    employeeList.style.display = 'block';
+    // AJAX-Anfrage zum Abrufen der Mitarbeiterdaten
+    fetch('/get_mitarbeiter/')
+        .then(response => response.json())
+        .then(data => {
+            // Mitarbeiterliste leeren
+            employeeList.innerHTML = '';
+            // Mitarbeiterdaten verarbeiten und in die Liste einfügen
+            data.forEach(mitarbeiter => {
+                var listItem = document.createElement('li');
+                listItem.textContent = mitarbeiter.vorname + ' ' + mitarbeiter.nachname;
+                employeeList.appendChild(listItem);
+            });
+        })
+        .catch(error => console.error('Error fetching employee data:', error));
+}
