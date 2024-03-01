@@ -36,3 +36,8 @@ class Auftrag(serializers.ModelSerializer):
         model = Auftrag
         fields = ['aid', 'mid', 'gid', 'aktion']
 
+class AuftragSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Auftrag
+        fields = '__all__'
+

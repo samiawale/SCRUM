@@ -36,10 +36,10 @@ urlpatterns = [
     path('get_mitarbeiter/', views.get_mitarbeiter, name='get_mitarbeiter'),
     path('get_auftrag/', views.get_auftrag, name='get_auftrag'),
     path('get-mitarbeiter-auftrag/', views.get_mitarbeiter_auftrag, name='get_mitarbeiter_auftrag'),
-  
+    path('api/auftrag/', views.create_auftrag, name='create_auftrag'),
     #path('geoplot', views.geoplot, name='geoplot'),
     path('get-geoplot/', views.get_geoplot, name='get_geoplot'),
     path('get-geoplot/<str:filter>/', views.get_geoplot_filtered, name='get_geoplot_filtered'),
-
+    path('get-polygon/', views.get_polygon, name='get_polygon'),
 
 ]
