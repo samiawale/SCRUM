@@ -243,3 +243,36 @@ function showEmployeeList() {
         })
         .catch(error => console.error('Error fetching employee data:', error));
 }
+
+var employeeListVisible = false;
+
+// Funktion zum Anzeigen oder Ausblenden der Mitarbeiterliste
+function toggleEmployeeList() {
+    var employeeList = document.getElementById('employeeList');
+    // Wenn die Mitarbeiterliste sichtbar ist, ausblenden; sonst anzeigen
+    if (employeeListVisible) {
+        employeeList.style.display = 'none';
+        employeeListVisible = false;
+    } else {
+        showEmployeeList();
+        employeeListVisible = true;
+    }
+}
+
+// Funktion zum Abrufen und Anzeigen der Mitarbeiterliste
+function showEmployeeList() {
+    var employeeList = document.getElementById('employeeList');
+    employeeList.style.display = 'block';
+
+    fetch('/get_mitarbeiter/')
+        .then(response => response.json())
+        .then(data => {
+            employeeList.innerHTML = ''; // Mitarbeiterliste leeren
+            data.forEach(mitarbeiter => {
+                var listItem = document.createElement('li');
+                listItem.textContent = mitarbeiter.vorname + ' ' + mitarbeiter.nachname;
+                employeeList.appendChild(listItem);
+            });
+        })
+        .catch(error => console.error('Error fetching employee data:', error));
+}
