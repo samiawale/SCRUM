@@ -49,7 +49,25 @@
         #treeList li:hover {
             background-color: #e9e9e9;
         }
+        .button {
+            background-color: #4CAF50; /* Grün */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .button:hover {
+            background-color: #45a049; /* Dunkleres Grün beim Hover */
+        }
     </style>
+
 
 </head>
 <body>
@@ -98,11 +116,6 @@
 </div>
 
 
-
-
-
-
-
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="{%static 'js/dist/leaflet.markercluster.js'%}"></script>
@@ -116,61 +129,12 @@
 <!-- Leere <ul>, in der die Bäume angezeigt werden -->
 <ul id="treeList" style="display: none;"></ul>
 
+<button class="button" onclick="showEmployeeList()">Mitarbeiterliste anzeigen</button>
 
+<!-- Liste für die Mitarbeiter -->
+<ul id="employeeList" style="display: none;"></ul>
 
-<div class="container mt-5">
-    <h2>Mitarbeiter und Bäume Verwaltung</h2>
-
-    <form id="filterForm">
-        <label for="employeeName">Mitarbeiter:</label>
-        <select id="employeeName" name="employeeName">
-            <option value="all">Alle Mitarbeiter</option>
-            <option value="John">John Doe</option>
-            <option value="Joe">Joema Ma</option>
-            <option value="Max">Max Mustermann</option>
-            <option value="Anna">Anna Musterfrau</option>
-            <option value="Chris">Chris Smith</option>
-            <option value="none">none</option>
-        </select>
-
-        <label for="treeAction">Aktion:</label>
-        <select id="treeAction" name="treeAction">
-            <option value="all">Alle Aktionen</option>
-            <option value="gießen">Gießen</option>
-            <option value="schneiden">Schneiden</option>
-            <option value="vollpflege">Vollpflege</option>
-        </select>
-
-        <button type="button" class="btn btn-primary" onclick="filterTable()">Filtern</button>
-    </form>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Tree ID</th>
-                <th>Gattung</th>
-                <th>Pflanzjahr</th>
-                <th>Gebiet</th>
-                <th>Strasse</th>
-                <th>lat</th>
-                <th>Long</th>
-                <th>is_water</th>
-                <th>Mitarbeiter</th>
-                <th>Action</th>
-                <th>Select</th>
-            </tr>
-        </thead>
-        <tbody id="treeTableBody">
-            <!-- JavaScript will populate this table body -->
-        </tbody>
-    </table>
-
-    <button type="button" class="btn btn-success" onclick="createAssignment()">Auftrag erstellen</button>
-    <p id="confirmationMsg" style="display: none; color: green;">Auftrag erstellt!</p>
-</div>
-
-
-
+<script src="script.js"></script>
 
 
 
