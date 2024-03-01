@@ -16,18 +16,34 @@ map.addLayer(drawnItems);
 // Initialize the draw control and pass it to the map
 var drawControl = new L.Control.Draw({
     draw: {
-        polyline: true,
+        polyline: false,
         polygon: true,
-        circle: true,
-        marker: true,
-        circlemarker: true,
-        rectangle: true
+        circle: false,
+        marker: false,
+        circlemarker: false,
+        rectangle: false 
     },
     edit: {
         featureGroup: drawnItems
     }
 });
+
 map.addControl(drawControl);
+
+// Event listener for when an item is created
+//map.on('draw:created', function(e) 
+map.on(L.Draw.Event.CREATED, function(e)
+{
+    var layer = e.layer;
+    var type = e.type;
+    console.log('Es wurde ein Object hinzugefügt')
+    var polygon_coordinates = layer.getLatLngs();
+    console.log(polygon_coordinates);
+   
+//adds item to the map 
+    drawnItems.addLayer(layer);
+});
+
 
 // Function to fetch tree data from the GeoPlot API
 function fetchFilteredTreeData(filter) {
@@ -42,7 +58,7 @@ function fetchFilteredTreeData(filter) {
         })
         .then(data => {
             // Verarbeiten Sie die zurückgegebenen Daten wie zuvor
-            var trees = data
+            var trees = data;
             trees.forEach(function(tree) {
                 var popupContent = `<strong>Gattung:</strong> ${tree.Gattung}<br>`;
                 popupContent += `<strong>Gebiet:</strong> ${tree.gebiet}<br>`;
@@ -75,12 +91,10 @@ function filterTrees() {
     }
     fetchFilteredTreeData(filter);
 }
+var filter = { "Gattung": "Tilia cordata, Winterlinde"};
+fetchFilteredTreeData(filter);
 
-// Event listener for when an item is created
-map.on('draw:created', function(e) {
-    var layer = e.layer;
-    drawnItems.addLayer(layer);
-});
+
 
 // Function to handle location found
 function onLocationFound(e) {
