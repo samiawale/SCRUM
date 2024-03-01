@@ -191,19 +191,17 @@ def get_mitarbeiter_auftrag(request, id):
     return JsonResponse(response, safe=False)
 
 def get_geoplot_filtered(request, filter):
-    # Nehmen wir an, dass filter ein JSON-Objekt ist, das die Filterkriterien enthält
-    # Zum Beispiel: {"Gattung": "Spitz-Ahorn", "pflanzjahr": 1950}
-    # Dann müssen Sie das JSON-Objekt in ein Python-Dictionary umwandeln
-    filter_dict = json.loads(filter)
+    filter_str = filter
+    print("Filter String:", filter_str)  # Debugging-Ausgabe hinzufügen
+    if filter_str:
+        filter_dict = json.loads(filter_str)
+        print("Filter Dictionary:", filter_dict)  # Debugging-Ausgabe hinzufügen
+        query = Q()
+        for key, value in filter_dict.items():
+            query &= Q(**{key: value})
+        geo_data = GeoData.objects.filter(query)
+    else:
+        geo_data = GeoData.objects.all()
 
-    # Verwenden Sie Q-Objekte, um nach mehreren Attributen zu filtern
-    query = Q()
-    for key, value in filter_dict.items():
-        query &= Q(**{key: value})
-
-    # Führen Sie die Abfrage mit den Filterkriterien aus
-    geo_data = GeoData.objects.filter(query)
-
-    # Erstellen Sie die JSON-Antwort
     response = [{'Gattung': value.Gattung, 'pflanzjahr': value.pflanzjahr, 'gebiet': value.gebiet, 'strasse': value.strasse, 'lat':value.lat,'long':value.long} for value in geo_data]
     return JsonResponse(response, safe=False)

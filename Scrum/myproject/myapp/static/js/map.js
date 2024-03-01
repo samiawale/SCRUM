@@ -30,30 +30,34 @@ var drawControl = new L.Control.Draw({
 map.addControl(drawControl);
 
 // Function to fetch tree data from the GeoPlot API
-function fetchTreeData() {
-    fetch('/get-geoplot/')  // Adjust the URL to match your endpoint
+function fetchFilteredTreeData(filter) {
+    // Senden Sie die Filterkriterien als JSON-Objekt an die Backend-URL
+    fetch(`/get-geoplot/${encodeURIComponent(JSON.stringify(filter))}/`)
         .then(response => {
             if (!response.ok) {
-                throw new Error('Failed to fetch tree data');
+                throw new Error('Failed to fetch filtered tree data');
             }
             return response.json();
         })
         .then(data => {
-            // Slice the first 100 trees
-            var trees = data.slice(0, data.length);
-            // Add trees as markers to the map
+            // Verarbeiten Sie die zurückgegebenen Daten wie zuvor
+            var trees = data.slice(0, 90000);
             trees.forEach(function(tree) {
-                var marker = L.marker([tree.lat, tree.long]).bindPopup(tree.Gattung + '\n' + tree.gebiet);
+                var popupContent = `<strong>Gattung:</strong> ${tree.Gattung}<br>`;
+                popupContent += `<strong>Gebiet:</strong> ${tree.gebiet}<br>`;
+                popupContent += `<strong>Pflanzjahr:</strong> ${tree.pflanzjahr}<br>`;
+                var marker = L.marker([tree.lat, tree.long]).bindPopup(popupContent);
                 markers.addLayer(marker);
             });
         })
         .catch(error => {
-            console.error('Error fetching tree data:', error.message);
+            console.error('Error fetching filtered tree data:', error.message);
         });
 }
 
-// Call the fetchTreeData function to load tree data and display it on the map
-fetchTreeData();
+// Beispiel für die Verwendung: Filter nach Spitz-Ahorn Bäumen aus dem Jahr 1950
+var filter = { "Gattung": "Tilia cordata, Winterlinde" };
+fetchFilteredTreeData(filter);
 
 // Event listener for when an item is created
 map.on('draw:created', function(e) {
