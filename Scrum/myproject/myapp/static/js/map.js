@@ -32,8 +32,7 @@ map.addControl(drawControl);
 
 // Event listener for when an item is created
 //map.on('draw:created', function(e) 
-map.on(L.Draw.Event.CREATED, function(e)
-{
+map.on(L.Draw.Event.CREATED, function(e) {
     var layer = e.layer;
     var type = e.type;
     console.log('Es wurde ein Object hinzugefügt')
@@ -42,7 +41,7 @@ map.on(L.Draw.Event.CREATED, function(e)
    
 //adds item to the map 
     drawnItems.addLayer(layer);
-    // fetchGeoFilteredTreeData(polygon_coordinates);
+
 });
 
 
