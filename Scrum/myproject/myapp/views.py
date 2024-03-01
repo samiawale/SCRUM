@@ -10,6 +10,7 @@ from .models import Tree
 from .serializers import TreeSerializer
 from .serializers import UserSerializer
 from .serializers import GeoData
+from .serializers import AuftragSerializer
 from django.contrib.auth.hashers import make_password  # Import make_password function
 from .models import User
 from rest_framework import status
@@ -202,6 +203,16 @@ def get_geoplot_filtered(request, filter):
         geo_data = GeoData.objects.filter(query)
     else:
         geo_data = GeoData.objects.all()
-    response = [{'Gattung': value.Gattung, 'pflanzjahr': value.pflanzjahr, 'gebiet': value.gebiet, 'strasse': value.strasse, 'lat': value.lat, 'long': value.long } for value in geo_data]
+
+    response = [{'Gattung': value.Gattung, 'pflanzjahr': value.pflanzjahr, 'gebiet': value.gebiet, 'strasse': value.strasse, 'lat': value.lat, 'long': value.long} for value in geo_data]
     return JsonResponse(response, safe=False)
+
+@api_view(['POST'])
+def create_auftrag(request):
+    serializer = AuftragSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
