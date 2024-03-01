@@ -212,8 +212,10 @@ def get_geoplot_filtered(request, filter):
 
 @api_view(['GET'])
 def get_polygon(request, poly_data):
-    polygon = json.loads(poly_data)
-    poly_path = Path(np.array(polygon))
+    polygon = json.loads(poly_data)['polygon']
+    polygon_coords = [(point[1], point[0]) for point in polygon]
+    print(polygon_coords)
+    poly_path = Path(np.array(polygon_coords))
 
     geo_data = GeoData.objects.all()
 
