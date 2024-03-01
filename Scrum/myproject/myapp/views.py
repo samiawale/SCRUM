@@ -202,7 +202,6 @@ def get_geoplot_filtered(request, filter):
         geo_data = GeoData.objects.filter(query)
     else:
         geo_data = GeoData.objects.all()
-
-    response = [{'Gattung': value.Gattung, 'pflanzjahr': value.pflanzjahr, 'gebiet': value.gebiet, 'strasse': value.strasse, 'lat': value.lat, 'long': value.long} for value in geo_data]
+    response = [{'Gattung': value.Gattung, 'pflanzjahr': value.pflanzjahr, 'gebiet': value.gebiet, 'strasse': value.strasse, 'lat': value.lat, 'long': value.long } for value in geo_data]
     return JsonResponse(response, safe=False)
 

@@ -59,12 +59,15 @@ function fetchFilteredTreeData(filter) {
         .then(data => {
             // Verarbeiten Sie die zurückgegebenen Daten wie zuvor
             var trees = data;
+            clearTreeList();
             trees.forEach(function(tree) {
                 var popupContent = `<strong>Gattung:</strong> ${tree.Gattung}<br>`;
                 popupContent += `<strong>Gebiet:</strong> ${tree.gebiet}<br>`;
                 popupContent += `<strong>Pflanzjahr:</strong> ${tree.pflanzjahr}<br>`;
+                popupContent += `<strong>Straße:</strong> ${tree.strasse}<br>`;
                 var marker = L.marker([tree.lat, tree.long]).bindPopup(popupContent);
                 markers.addLayer(marker);
+                addToTreeList(tree);
             });
         })
         .catch(error => {
@@ -72,29 +75,96 @@ function fetchFilteredTreeData(filter) {
         });
 }
 
+// Funktion zum Umschalten der Baumliste
+function toggleTreeList() {
+    var treeList = document.getElementById('treeList');
+    var toggleListButton = document.getElementById('toggleListButton');
+
+    if (treeList.style.display === 'block') {
+        // Wenn die Liste angezeigt wird, verbergen
+        treeList.style.display = 'none';
+        // Text des Buttons ändern, wenn die Liste geschlossen ist
+        toggleListButton.textContent = 'Bäume anzeigen';
+    } else {
+        // Wenn die Liste verborgen ist, anzeigen
+        treeList.style.display = 'block';
+        // Bäume nur anzeigen, wenn die Liste geöffnet wird
+        showTreeList();
+        // Text des Buttons ändern, wenn die Liste geöffnet ist
+        updateToggleListButtonText();
+    }
+}
+
+// Funktion zum Aktualisieren des Textes des Toggle-List-Buttons
+function updateToggleListButtonText() {
+    var treeList = document.getElementById('treeList');
+    var toggleListButton = document.getElementById('toggleListButton');
+    var treeCount = treeList.getElementsByTagName('li').length; // Anzahl der Bäume in der Liste
+    toggleListButton.textContent = treeCount + ' Bäume anzeigen';
+}
+
+
+
+    // Ansonsten die Liste anzeigen und Bäume laden
+    treeList.style.display = 'block';
+    fetchFilteredTreeData(); // Hier rufen Sie Ihre Funktion auf, um die Bäume zu laden
+
+
+// Funktion zum Löschen der Baumliste
+function clearTreeList() {
+    var treeList = document.getElementById('treeList');
+    treeList.innerHTML = '';
+}
+
+// Funktion zum Hinzufügen des Baumes mit allen Parametern zur Liste
+function addToTreeList(tree) {
+    var treeList = document.getElementById('treeList');
+    var listItem = document.createElement('li');
+
+    // Bauminformationen in HTML-Format zusammenstellen
+    var treeInfo = `
+        <strong>Gattung:</strong> ${tree.Gattung}<br>
+        <strong>Baumalter:</strong> ${tree.pflanzjahr}<br>
+        <strong>Gebiet:</strong> ${tree.gebiet}<br>
+        <strong>Straße:</strong> ${tree.strasse}<br>
+        <!-- Weitere Parameter hier hinzufügen -->
+    `;
+
+    // HTML-Format als InnerHTML des Listenelements setzen
+    listItem.innerHTML = treeInfo;
+
+    // Listenelement zur Liste hinzufügen
+    treeList.appendChild(listItem);
+}
+
 // Beispiel für die Verwendung: Filter nach Spitz-Ahorn Bäumen aus dem Jahr 1950
 
 function filterTrees() {
-    var treeName = document.getElementById('Gattung').value;
-    var treeAge = document.getElementById('pflanzjahr').value;
+    var gattung = document.getElementById('Gattung').value;
+    var pflanzjahr = document.getElementById('pflanzjahr').value;
+    var gebiet = document.getElementById('gebiet').value;
+    var strasse = document.getElementById('strasse').value;
 
     var filter = {};
 
-    // Prüfen, ob ein Baumname eingegeben wurde
-    if (treeName.trim() !== "") {
-        filter["Gattung"] = treeName;
+    if (gattung.trim() !== "") {
+        filter["Gattung"] = gattung;
     }
 
-    // Prüfen, ob ein Baumalter eingegeben wurde
-    if (treeAge.trim() !== "") {
-        filter["pflanzjahr"] = treeAge;
+    if (pflanzjahr.trim() !== "") {
+        filter["pflanzjahr"] = pflanzjahr;
     }
+
+    if (gebiet.trim() !== "") {
+        filter["gebiet"] = gebiet;
+    }
+
+    if (strasse.trim() !== "") {
+        filter["strasse"] = strasse;
+    }
+
     fetchFilteredTreeData(filter);
 }
-var filter = { "Gattung": "Tilia cordata, Winterlinde"};
-fetchFilteredTreeData(filter);
-
-
 
 // Function to handle location found
 function onLocationFound(e) {

@@ -28,6 +28,29 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="{% static 'js/dist/leaflet.markercluster.js' %}"></script>
 
+    <!-- Custom CSS for tree list -->
+    <style>
+        #treeList {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+            color: black; /* Textfarbe festlegen */
+        }
+
+        #treeList li {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        #treeList li:hover {
+            background-color: #e9e9e9;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -51,12 +74,18 @@
 <!-- Main Content -->
 <div class="container mt-5">
     <!-- Formular mit den Textfeldern -->
-    <form id="filterForm">
-        <label for="Gattung">Baumname:</label>
-        <input type="text" id="Gattung" name="Gattung" class="form-control mb-3" placeholder="Baumname eingeben">
+    <form id="filterTrees">
+        <label for="Gattung">Gattung:</label>
+        <input type="text" id="Gattung" name="Gattung" class="form-control mb-3" placeholder="Gattung eingeben">
 
-        <label for="pflanzjahr">Baumalter:</label>
-        <input type="number" id="pflanzjahr" name="pflanzjahr" class="form-control mb-3" placeholder="Baumalter eingeben">
+        <label for="pflanzjahr">Pflanzjahr:</label>
+        <input type="number" id="pflanzjahr" name="pflanzjahr" class="form-control mb-3" placeholder="Pflanzjahr eingeben">
+
+        <label for="gebiet">Gebiet:</label>
+        <input type="text" id="gebiet" name="gebiet" class="form-control mb-3" placeholder="Gebiet eingeben">
+
+        <label for="strasse">Straße:</label>
+        <input type="text" id="strasse" name="strasse" class="form-control mb-3" placeholder="Straße eingeben">
         
             <!-- Weitere Baumtypen hier hinzufügen -->
         </select>
@@ -80,6 +109,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
 
 <script src="{%static 'js/map.js' %}"> </script>
+
+<!-- Schaltfläche, um die Liste anzuzeigen -->
+<button type="button" class="btn btn-primary" id="toggleListButton" onclick="toggleTreeList()">Bäume anzeigen</button>
+
+<!-- Leere <ul>, in der die Bäume angezeigt werden -->
+<ul id="treeList" style="display: none;"></ul>
 
 
 

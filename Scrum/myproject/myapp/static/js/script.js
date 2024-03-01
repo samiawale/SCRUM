@@ -2,13 +2,7 @@
 var employees = ['John Doe', 'Joema Ma', 'Max Mustermann', 'Anna Musterfrau', 'Chris Smith'];
 
 // List of Trees
-var trees = [
-    { id: 1, Gattung: 'Eiche 1', Pflanzjahr: 1990, Gebiet: 'AMT 66', Strasse: 'johannes-goederitz-strasse', lat: 123, Long: 456, is_water: true },
-    { id: 2, Gattung: 'Ahorn 1', Pflanzjahr: 1973, Gebiet: 'oeffentliches Gruen', Strasse: 'Musterstrasse', lat: 123, Long: 456, is_water: false },
-    { id: 3, Gattung: 'Birke 1', Pflanzjahr: 1998, Gebiet: 'Spielplatz', Strasse: 'Parkweg', lat: 123, Long: 456, is_water: true },
-    { id: 4, Gattung: 'Kiefer 1', Pflanzjahr: 2005, Gebiet: 'AMT 66', Strasse: 'Hauptstrasse', lat: 123, Long: 456, is_water: false },
-    { id: 5, Gattung: 'Ulme 1', Pflanzjahr: 2004, Gebiet: 'Amt 66', Strasse: 'Baumallee', lat: 123, Long: 456, is_water: true }
-];
+
 
 
 // Function to populate the table

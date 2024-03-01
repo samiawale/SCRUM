@@ -47,10 +47,16 @@ class GeoData(models.Model):
     lat = models.FloatField()
     long = models.FloatField()
 
+    def __str__(self) -> str:
+        return f"ID:{self.id} Lat:{self.lat} Long:{self.long}"
+
 class Mitarbeiter(models.Model):
     mid = models.AutoField(primary_key=True)
     vorname = models.CharField(max_length = 50)
     nachname = models.CharField(max_length = 50)
+    def __str__(self):
+        return f"{self.vorname} {self.nachname}"
+
 
 class Auftrag(models.Model):
     aid = models.AutoField(primary_key=True)
