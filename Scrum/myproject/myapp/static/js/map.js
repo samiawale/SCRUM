@@ -31,6 +31,7 @@ map.addControl(drawControl);
 
 // Function to fetch tree data from the GeoPlot API
 function fetchFilteredTreeData(filter) {
+    markers.clearLayers();
     // Senden Sie die Filterkriterien als JSON-Objekt an die Backend-URL
     fetch(`/get-geoplot/${encodeURIComponent(JSON.stringify(filter))}/`)
         .then(response => {
@@ -56,8 +57,6 @@ function fetchFilteredTreeData(filter) {
 }
 
 // Beispiel für die Verwendung: Filter nach Spitz-Ahorn Bäumen aus dem Jahr 1950
-var filter = { "Gattung": "Tilia"};
-fetchFilteredTreeData(filter);
 
 function filterTrees() {
     var treeName = document.getElementById('Gattung').value;
