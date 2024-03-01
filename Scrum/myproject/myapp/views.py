@@ -2,6 +2,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.shortcuts import render 
 from django.http import JsonResponse 
+import json
 
 # from loguru import logger
 from datetime import datetime
@@ -18,6 +19,7 @@ from datetime import datetime, timedelta
 from django.contrib.auth import authenticate
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.hashers import check_password
+from django.db.models import Q
 from loguru import logger
 
 import geopandas as gpd
@@ -166,12 +168,12 @@ def get_geoplot(request):
     
     response = [{'Gattung': value.Gattung, 'pflanzjahr': value.pflanzjahr, 'gebiet': value.gebiet, 'strasse': value.strasse, 'lat':value.lat,'long':value.long} for value in geo_data]
     return JsonResponse(response, safe=False)
-
+    
 @api_view(['GET'])
 def get_mitarbeiter(request):
     mitarbeiter = Mitarbeiter.objects.all()
 
-    response = [{'id':value.mid,'vorname': value.vorname, 'nachname': value.nachname} for value in mitarbeiter]
+    response = [{'mid':value.mid,'vorname': value.vorname, 'nachname': value.nachname} for value in mitarbeiter]
     return JsonResponse(response, safe=False)
 
 @api_view(['GET'])    
@@ -189,6 +191,19 @@ def get_mitarbeiter_auftrag(request, id):
     return JsonResponse(response, safe=False)
 
 def get_geoplot_filtered(request, filter):
-    geo_data = GeoData.objects.filter(Gattung=filter)
+    # Nehmen wir an, dass filter ein JSON-Objekt ist, das die Filterkriterien enthält
+    # Zum Beispiel: {"Gattung": "Spitz-Ahorn", "pflanzjahr": 1950}
+    # Dann müssen Sie das JSON-Objekt in ein Python-Dictionary umwandeln
+    filter_dict = json.loads(filter)
+
+    # Verwenden Sie Q-Objekte, um nach mehreren Attributen zu filtern
+    query = Q()
+    for key, value in filter_dict.items():
+        query &= Q(**{key: value})
+
+    # Führen Sie die Abfrage mit den Filterkriterien aus
+    geo_data = GeoData.objects.filter(query)
+
+    # Erstellen Sie die JSON-Antwort
     response = [{'Gattung': value.Gattung, 'pflanzjahr': value.pflanzjahr, 'gebiet': value.gebiet, 'strasse': value.strasse, 'lat':value.lat,'long':value.long} for value in geo_data]
     return JsonResponse(response, safe=False)
