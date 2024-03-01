@@ -41,6 +41,7 @@ mit = Mitarbeiter.objects.all()[2]
 baum = GeoData.objects.all()[5]
 
 
+
 auftrag = Auftrag(mid=mit, gid=baum, aktion='Pflanzung')
 auftrag.save()
 
