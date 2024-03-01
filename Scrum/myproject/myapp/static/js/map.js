@@ -59,18 +59,71 @@ function fetchFilteredTreeData(filter) {
         .then(data => {
             // Verarbeiten Sie die zurückgegebenen Daten wie zuvor
             var trees = data;
+            clearTreeList();
             trees.forEach(function(tree) {
                 var popupContent = `<strong>Gattung:</strong> ${tree.Gattung}<br>`;
                 popupContent += `<strong>Gebiet:</strong> ${tree.gebiet}<br>`;
                 popupContent += `<strong>Pflanzjahr:</strong> ${tree.pflanzjahr}<br>`;
                 popupContent += `<strong>Straße:</strong> ${tree.strasse}<br>`;
+                popupContent += `<button onclick="addToTreeList(${JSON.stringify(tree)})">Add</button>`;
                 var marker = L.marker([tree.lat, tree.long]).bindPopup(popupContent);
                 markers.addLayer(marker);
+                addToTreeList(tree);
             });
         })
         .catch(error => {
             console.error('Error fetching filtered tree data:', error.message);
         });
+}
+
+// Funktion, um die Liste der Bäume anzuzeigen
+function toggleTreeList() {
+    var treeList = document.getElementById('treeList');
+    var toggleListButton = document.getElementById('toggleListButton');
+
+    if (treeList.style.display === 'block') {
+        // Wenn die Liste angezeigt wird, verbergen und Text des Buttons ändern
+        treeList.style.display = 'none';
+        toggleListButton.textContent = 'Liste anzeigen';
+    } else {
+        // Wenn die Liste verborgen ist, anzeigen und Text des Buttons ändern
+        treeList.style.display = 'block';
+        toggleListButton.textContent = 'Liste schließen';
+        // Bäume nur anzeigen, wenn die Liste geöffnet wird
+        showTreeList();
+    }
+}
+
+    // Ansonsten die Liste anzeigen und Bäume laden
+    treeList.style.display = 'block';
+    fetchFilteredTreeData(); // Hier rufen Sie Ihre Funktion auf, um die Bäume zu laden
+
+
+// Funktion zum Löschen der Baumliste
+function clearTreeList() {
+    var treeList = document.getElementById('treeList');
+    treeList.innerHTML = '';
+}
+
+// Funktion zum Hinzufügen des Baumes mit allen Parametern zur Liste
+function addToTreeList(tree) {
+    var treeList = document.getElementById('treeList');
+    var listItem = document.createElement('li');
+
+    // Bauminformationen in HTML-Format zusammenstellen
+    var treeInfo = `
+        <strong>Gattung:</strong> ${tree.Gattung}<br>
+        <strong>Baumalter:</strong> ${tree.pflanzjahr}<br>
+        <strong>Gebiet:</strong> ${tree.gebiet}<br>
+        <strong>Straße:</strong> ${tree.strasse}<br>
+        <!-- Weitere Parameter hier hinzufügen -->
+    `;
+
+    // HTML-Format als InnerHTML des Listenelements setzen
+    listItem.innerHTML = treeInfo;
+
+    // Listenelement zur Liste hinzufügen
+    treeList.appendChild(listItem);
 }
 
 // Beispiel für die Verwendung: Filter nach Spitz-Ahorn Bäumen aus dem Jahr 1950
