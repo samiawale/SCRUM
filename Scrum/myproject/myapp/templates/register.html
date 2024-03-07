@@ -18,7 +18,7 @@
   <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-md-6">
-        <img id="login-logo" src="{% static 'img/logo.png/' %}" alt="Description" class="img-fluid d-block mx-auto mb-4"> 
+        <img id="login-logo" src="{% static 'img/logo.png/' %}" alt="logo" class="img-fluid d-block mx-auto mb-4"> 
         <!-- Replace "your-logo.png" with the path to your logo image -->
 
         <div class="card">
@@ -121,13 +121,13 @@
                       localStorage.setItem('User_Data', user_data); 
 
                       Swal.fire({
-                      title: 'Alert!',
+                      title: 'Done',
                       text: 'Registration Successful.',
                       icon: 'info',
                       confirmButtonText: 'Okay'
                       }).then((result) => {
                           if (result.isConfirmed) {
-                              window.location.href = "http://127.0.0.1:8000/home"; // Redirect to Home page
+                              window.location.href = "http://127.0.0.1:8000/login"; // Redirect to Home page
                           }
                       }); 
 
@@ -152,6 +152,12 @@
                       } else {
                           // If there are other types of errors or the structure is unexpected
                           // Show a general error message or perform other actions
+                          Swal.fire({
+                              title: 'Error!',
+                              text: 'An error occurred while processing your request. Please try again later.',
+                              icon: 'error',
+                              confirmButtonText: 'Okay'
+                          });
                       }
                   }
               });
