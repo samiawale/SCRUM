@@ -1,7 +1,8 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.shortcuts import render 
-from django.http import JsonResponse 
+from django.http import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 import json
 
 # from loguru import logger
@@ -9,7 +10,7 @@ from datetime import datetime
 from .models import Tree
 from .serializers import TreeSerializer
 from .serializers import UserSerializer
-from .serializers import GeoData
+from .serializers import GeoDataSerializer
 from .serializers import AuftragSerializer
 from django.contrib.auth.hashers import make_password  # Import make_password function
 from .models import User
@@ -41,11 +42,6 @@ def test_token(request):
     return Response({})
 
 def home(request):
-    return render(request,'index.html')
-
-def test_site(request):
-    return render(request,'test_site.html')
-def home(request): 
     return render(request, 'index.html')
 
 def register_view(request): 
@@ -187,18 +183,19 @@ def get_auftrag(request):
     response = [{'aid':value.aid,'mid': value.mid, 'gid': value.gid, 'aktion': value.aktion} for value in auftrag]
     return JsonResponse(response, safe=False)
 
-@api_view(['Get'])
+@api_view(['GET'])
 def get_mitarbeiter_auftrag(request, id):
-    auftrag = Auftrag.objects.filter(mid=id)
+    print(id)
+    auftrag = Auftrag.objects.filter(mid_id = id)
+    
 
-    response = [{'aid':value.aid,'mid': value.mid, 'gid': value.gid, 'aktion': value.aktion} for value in auftrag]
+    response = [{'aid':value.aid,'mid': value.mid.mid, 'gid': value.gid.id, 'aktion': value.aktion} for value in auftrag]
     return JsonResponse(response, safe=False)
 
 @api_view(['GET'])
 def get_geoplot_filtered(request, filter):
-    filter_str = filter
-    if filter_str:
-        filter_dict = json.loads(filter_str)
+    if filter:
+        filter_dict = json.loads(filter)
         query = Q()
         for key, value in filter_dict.items():
             # Use __icontains for case-insensitive partial string match
@@ -213,28 +210,103 @@ def get_geoplot_filtered(request, filter):
 @api_view(['GET'])
 def get_polygon(request, poly_data):
     polygon = json.loads(poly_data)['polygon']
-    polygon_coords = [(point[1], point[0]) for point in polygon]
-    print(polygon_coords)
+    polygon_coords = [(point[0], point[1]) for point in polygon]
+    # print(polygon_coords)
     poly_path = Path(np.array(polygon_coords))
 
     geo_data = GeoData.objects.all()
 
-    entries_within_polygon = []
+    trees_within_polygon = []
 
-    for entry in geo_data:
-        point = (entry.long, entry.lat)
+    for tree in geo_data:
+        point = (tree.lat, tree.long)
         if poly_path.contains_point(point):
-            entries_within_polygon.append(entry)
+            trees_within_polygon.append(tree)
 
-    response = [{'Gattung': value.Gattung, 'pflanzjahr': value.pflanzjahr, 'gebiet': value.gebiet, 'strasse': value.strasse, 'lat': value.lat, 'long': value.long } for value in entries_within_polygon]
+    
+    response = [{'Gattung': value.Gattung, 'pflanzjahr': value.pflanzjahr, 'gebiet': value.gebiet, 'strasse': value.strasse, 'lat': value.lat, 'long': value.long } for value in trees_within_polygon]
     return JsonResponse(response, safe=False)
     
-@api_view(['POST'])
+# @api_view(['POST'])
+# def create_auftrag(request):
+#     serializer = AuftragSerializer(data=request.data)
+#     if serializer.is_valid():
+#         serializer.save()
+#         return Response(serializer.data, status=status.HTTP_201_CREATED)
+#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@csrf_exempt
 def create_auftrag(request):
-    serializer = AuftragSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    if request.method == 'POST':
+        mid = request.POST.get('mid')
+        gids = request.POST.getlist('gids')
+        aktion = request.POST.get('aktion')
+        mitarbeiter = Mitarbeiter.objects.get(pk=mid)
+        
+        # Split the string into a list of strings
+        print(gids)
+
+        # Convert each string in the list to an integer
+        gid_list = gids[0].split(',')
+        
+        for gid in gid_list:
+            geodata = GeoData.objects.get(pk=gid)
+            Auftrag.objects.create(mid=mitarbeiter, gid=geodata, aktion=aktion)
+        return JsonResponse({'status': 'success'}, status=201)
+    else:
+        return JsonResponse({'error': 'Invalid HTTP method'}, status=400)
+
+@api_view(['POST'])
+def water_tree(request,id):
+    geo_data = GeoData.objects.get(id=id)
+    geo_data.last_watered = datetime.now()
+    geo_data.is_water = True
+    geo_data.save()
+    return JsonResponse({'message': 'Data updated successfully'}) 
+
+def water_filtered(request, filter):
+    if filter:
+        filter_dict = json.loads(filter)
+        query = Q()
+        for key, value in filter_dict.items():
+            # Use __icontains for case-insensitive partial string match
+            query &= Q(**{f"{key}__icontains": value})
+        geo_data = GeoData.objects.filter(query)
+    else:
+        geo_data = GeoData.objects.all()
+
+    for tree in geo_data:
+        tree.last_watered = datetime.now()
+        tree.is_water = True
+        tree.save()
+    return JsonResponse({'message': 'Data updated successfully'}) 
+
+def water_polygon(request, poly_data):
+    polygon = json.loads(poly_data)['polygon']
+    polygon_coords = [(point[0], point[1]) for point in polygon]
+    # print(polygon_coords)
+    poly_path = Path(np.array(polygon_coords))
+
+    geo_data = GeoData.objects.all()
+
+    for tree in geo_data:
+        point = (tree.lat, tree.long)
+        if poly_path.contains_point(point):
+            tree.last_watered = datetime.now()
+            tree.is_water = True
+            tree.save()
+    return JsonResponse({'message': 'Data updated successfully'})
+
+@api_view(['POST'])
+def delete_auftrag(request,id):
+    auftrag = Auftrag.objects.get(aid=id)
+    auftrag.delete()
+    return JsonResponse({'message': 'Data deleted successfully'})
+
+@api_view(['POST'])
+def delete_mitarbeiter(request,id):
+    mitarbeiter = Mitarbeiter.objects.get(mid=id)
+    mitarbeiter.delete()
+    return JsonResponse({'message': 'Data deleted successfully'})   
 
 

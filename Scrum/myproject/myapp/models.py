@@ -46,6 +46,8 @@ class GeoData(models.Model):
     strasse = models.CharField(max_length=255)
     lat = models.FloatField()
     long = models.FloatField()
+    is_watered = models.BooleanField(default=False)
+    last_watered = models.DateTimeField(null=True, blank=True)
 
     def __str__(self) -> str:
         return f"ID:{self.id} Lat:{self.lat} Long:{self.long}"

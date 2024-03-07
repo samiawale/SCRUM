@@ -21,20 +21,15 @@ class UserSerializer(serializers.ModelSerializer):
         }
 
 
-class GeoData(serializers.ModelSerializer):
+class GeoDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = GeoData
         fields = ['id', 'Gattung', 'pflanzjahr', 'gebiet', 'strasse', 'lat','long']
         
-class Mitarbeiter(serializers.ModelSerializer):
+class MitarbeiterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mitarbeiter
         fields = ['id', 'first_name', 'last_name']
-
-class Auftrag(serializers.ModelSerializer):
-    class Meta:
-        model = Auftrag
-        fields = ['aid', 'mid', 'gid', 'aktion']
 
 class AuftragSerializer(serializers.ModelSerializer):
     class Meta:
